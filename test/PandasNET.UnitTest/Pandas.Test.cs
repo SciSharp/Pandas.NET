@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PandasNET.UnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class PandasTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestPandas()
         {
+            var pd = new Pandas();
         }
     }
 }
