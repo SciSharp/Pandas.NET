@@ -1,36 +1,40 @@
-﻿using System;
+﻿using NumSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace PandasNET.Extensions
 {
     public static partial class PandasExtensions
     {
-        public static DataFrame<double> read_csv(this Pandas pd, string filepath_or_buffer)
+        public static DataFrame<double> read_csv(this Pandas pd, string filepath_or_buffer, string sep = ",")
         {
+            var data = new List<double[]>();
+            var columns = new List<string>();
+
             using (StreamReader reader = new StreamReader(filepath_or_buffer))
             {
                 string line = String.Empty;
-
                 while (!String.IsNullOrEmpty(line = reader.ReadLine()))
                 {
                     var tokens = line.Split(',');
-                    /*x1.AddRange(tokens.Select(x => double.Parse(x)).Take(tokens.Length - 1));
-
-                    var _y = int.Parse(tokens[tokens.Length - 1]);
-                    if (!labels.Contains(_y))
+                    // for header
+                    if(columns.Count == 0)
                     {
-                        labels.Add(_y);
+                        columns.AddRange(tokens);
+                        continue;
                     }
-                    y1.Add(labels.FindIndex(l => l == _y));
 
-                    length1d++;
-                    length2d = tokens.Length - 1;*/
+                    data.Add(tokens.Select(x => double.Parse(x)).Take(tokens.Length).ToArray());
                 }
             }
 
-            return null;
+            var nd = new NumPy<double>().array(data.ToArray());
+            var df = pd.DataFrame(nd, columns: columns);
+
+            return df;
         }
     }
 }
