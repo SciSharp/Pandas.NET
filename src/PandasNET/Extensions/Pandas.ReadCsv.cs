@@ -9,7 +9,8 @@ namespace PandasNET.Extensions
 {
     public static partial class PandasExtensions
     {
-        public static DataFrame<double> read_csv(this Pandas pd, string filepath_or_buffer, string sep = ",")
+        
+        public static DataFrame<int,double> read_csv(this Pandas pd, string filepath_or_buffer, string sep = ",")
         {
             var data = new List<double[]>();
             var columns = new List<string>();
@@ -32,9 +33,10 @@ namespace PandasNET.Extensions
             }
 
             var nd = new NumPy<double>().array(data.ToArray());
-            var df = pd.DataFrame(nd, columns: columns);
+            var df = pd.DataFrame<int,double>(nd, columns: columns);
 
             return df;
         }
+        
     }
 }
