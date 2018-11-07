@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\NumSharp\src\NumSharp\NumSharp.csproj" />
+    <PackageReference Include="NumSharp" Version="0.3.0" />
   </ItemGroup>
 
 </Project>
