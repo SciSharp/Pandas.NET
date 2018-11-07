@@ -2,11 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using PandasNET;
 
 namespace PandasNET
 {
-    public class Index : NDArray<string>
+    public class Index<T>
     {
-        public NDArray<string> Values { get; set; }
+        public Index()
+        {
+            
+        }   
+        public NDArray<T> Values { get; set; } 
     }
 }
