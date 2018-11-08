@@ -5,8 +5,10 @@ using System.Text;
 
 namespace PandasNET
 {
-    public class Series<T> : NDArray<T>
+    public class Series
     {
         public String Name { get; set; }
+
+        public NDArray<object> Values { get; set; }
     }
 }

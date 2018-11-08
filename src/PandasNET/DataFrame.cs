@@ -15,12 +15,13 @@ namespace PandasNET
     {
         public DataFrame()
         {
-            _ColumnArrayMapping = new Dictionary<string, NDArray<TData>>();
+            // _ColumnArrayMapping = new Dictionary<string, NDArray<TData>>();
             Columns = new Index<string>();
             Columns.Values = new NDArray<string>();
             Columns.Values.Data = null;
         }
-        public NDArray<TData> this[string column]
+
+        /*public NDArray<TData> this[string column]
         {
             get 
             {
@@ -51,9 +52,9 @@ namespace PandasNET
                 _ColumnArrayMapping[column] = value;
             }
         } 
-        protected Dictionary<string,NDArray<TData>> _ColumnArrayMapping;
+        protected Dictionary<string,NDArray<TData>> _ColumnArrayMapping;*/
         public Index<TIndex> Index {get;set;}
         public Index<string> Columns {get;set;}
-        public NDArray<TData> Values { get; set; }
+        public List<Series> Values { get; set; }
     }
 }

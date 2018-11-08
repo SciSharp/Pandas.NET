@@ -33,8 +33,8 @@ namespace PandasNET.Extensions
 
             }
 
-            for(int idx = 0; idx < columns.Count;idx++)
-                df[columns[idx]] = data[idx];
+            /*for(int idx = 0; idx < columns.Count;idx++)
+                df[columns[idx]] = data[idx];*/
         
             df.Index = new Index<TInd>();
             df.Index.Values = new NDArray<TInd>();
