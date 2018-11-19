@@ -6,12 +6,11 @@ using PandasNET;
 
 namespace PandasNET
 {
-    public class Index<T>
+    public class Index<T> : PandasObject<T>
     {
-        public Index()
+        public Index(NDArray<T> array) : base(array)
         {
-            
-        }   
-        public NDArray<T> Values { get; set; } 
+
+        }
     }
 }

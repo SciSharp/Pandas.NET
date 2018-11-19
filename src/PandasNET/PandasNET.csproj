@@ -8,4 +8,8 @@
     <PackageReference Include="NumSharp" Version="0.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\NumSharp\src\NumSharp\NumSharp.csproj" />
+  </ItemGroup>
+
 </Project>

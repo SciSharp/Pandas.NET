@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D898CB86-698B-46B0-B0EE-84A44A82679F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandasNET", "src\PandasNET\PandasNET.csproj", "{CBCFC3C9-B3B3-43F8-8C77-7042175A83CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandasNET", "src\PandasNET\PandasNET.csproj", "{CBCFC3C9-B3B3-43F8-8C77-7042175A83CE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{552C215B-371D-47FC-8C22-80C2C85368AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandasNET.UnitTest", "test\PandasNET.UnitTest\PandasNET.UnitTest.csproj", "{7E0DEBAD-402C-48CE-9D70-2BE5AD958079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PandasNET.UnitTest", "test\PandasNET.UnitTest\PandasNET.UnitTest.csproj", "{7E0DEBAD-402C-48CE-9D70-2BE5AD958079}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumSharp", "..\NumSharp\src\NumSharp\NumSharp.csproj", "{F339FB8D-A89D-4EF9-B208-84279412F3A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CBCFC3C9-B3B3-43F8-8C77-7042175A83CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -48,9 +47,28 @@ Global
 		{7E0DEBAD-402C-48CE-9D70-2BE5AD958079}.Release|x64.Build.0 = Release|Any CPU
 		{7E0DEBAD-402C-48CE-9D70-2BE5AD958079}.Release|x86.ActiveCfg = Release|Any CPU
 		{7E0DEBAD-402C-48CE-9D70-2BE5AD958079}.Release|x86.Build.0 = Release|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Debug|x64.Build.0 = Debug|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Release|x64.ActiveCfg = Release|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Release|x64.Build.0 = Release|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CBCFC3C9-B3B3-43F8-8C77-7042175A83CE} = {D898CB86-698B-46B0-B0EE-84A44A82679F}
 		{7E0DEBAD-402C-48CE-9D70-2BE5AD958079} = {552C215B-371D-47FC-8C22-80C2C85368AF}
+		{F339FB8D-A89D-4EF9-B208-84279412F3A1} = {D898CB86-698B-46B0-B0EE-84A44A82679F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F1D60AD-A092-4706-9559-E433A9BCD193}
 	EndGlobalSection
 EndGlobal

@@ -5,10 +5,11 @@ using System.Text;
 
 namespace PandasNET
 {
-    public class Series
+    public class Series<T> : PandasObject<T>
     {
-        public String Name { get; set; }
+        public Series(NDArray<T> array) : base(array)
+        {
 
-        public NDArray<object> Values { get; set; }
+        }
     }
 }
