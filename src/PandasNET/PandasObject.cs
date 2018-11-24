@@ -1,22 +1,23 @@
 ﻿using NumSharp;
+using NumSharp.Core;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PandasNET
 {
-    public class PandasObject<T>
+    public class PandasObject
     {
-        public string Name { get; set; }
-        public NDArray<T> Values { get; set; }
-        public int NDim => Values.NDim;
-        public Shape Shape => Values.Shape;
-        public int Size => Values.Size;
-        public Type DType => typeof(T);
+        public Type dtype { get; set; }
 
-        public PandasObject(NDArray<T> array)
-        {
-            Values = array;
-        }
+        public string name { get; set; }
+
+        public NDArray values { get; set; }
+
+        public int ndim => values.NDim;
+
+        public Shape shape => values.Shape;
+
+        public int size => values.Size;
     }
 }

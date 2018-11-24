@@ -1,4 +1,5 @@
 ﻿using NumSharp;
+using NumSharp.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +11,7 @@ namespace PandasNET.Extensions
     public static partial class PandasExtensions
     {
         
-        public static DataFrame<int,double> read_csv(this Pandas pd, string filepath_or_buffer, string sep = ",", string delimiter = ",", int? header = 0,
+        public static DataFrame<int> read_csv(this Pandas pd, string filepath_or_buffer, string sep = ",", string delimiter = ",", int? header = 0,
             List<IColumnType> dtype = null)
         {
             var data = new List<double[]>();
@@ -43,8 +44,8 @@ namespace PandasNET.Extensions
                 dtype.Add(ColumnHelper.Infer(headers[i], data[i]));
             }
 
-            var nd = new NumPy<double>().array(data.ToArray());
-            //var df = pd.DataFrame<int,double>(nd, columns: columns);
+            var nd = new NumPy().array(data.ToArray());
+            //var df = pd.DataFrame<int,double>(nd);
 
             return null;
         }

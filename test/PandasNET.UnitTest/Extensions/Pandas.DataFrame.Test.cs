@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NumSharp;
-using NumSharp.Extensions;
+using NumSharp.Core;
 using PandasNET.Extensions;
 using System;
 using System.Collections.Generic;
@@ -14,10 +14,10 @@ namespace PandasNET.UnitTest.Extensions
         [TestMethod]
         public void DataFrame()
         {
-            var np = new NumPy<int>();
+            var np = new NumPy();
             var pd = new Pandas();
             var array = np.random.randint(low: 0, high: 10, size: new Shape(5, 5));
-            var df = pd.DataFrame<int,int>(array, columns: new string[] { "a", "b", "c", "d", "e" });
+            // var df = pd.DataFrame<int, >((NDArray<object>)array, columns: new string[] { "a", "b", "c", "d", "e" });
 
             /*var column1 = df["a"];
 

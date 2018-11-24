@@ -1,4 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NumSharp;
+using NumSharp.Core;
+using PandasNET.Extensions;
 
 namespace PandasNET.UnitTest
 {
@@ -8,7 +11,10 @@ namespace PandasNET.UnitTest
         [TestMethod]
         public void TestPandas()
         {
+            var np = new NumPy();
             var pd = new Pandas();
+            var nd = np.random.randn(10);
+            var s = pd.Series(nd);
         }
     }
 }

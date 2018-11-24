@@ -1,9 +1,9 @@
-﻿using NumSharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Dynamic;
+using NumSharp.Core;
 
 namespace PandasNET
 {
@@ -11,14 +11,13 @@ namespace PandasNET
     /// Two-dimensional size-mutable, potentially heterogeneous tabular data structure with labeled axes (rows and columns).
     /// https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html
     /// </summary>
-    public class DataFrame<TIndex,TData> 
+    public class DataFrame<TIndex>
     {
         public DataFrame()
         {
             // _ColumnArrayMapping = new Dictionary<string, NDArray<TData>>();
-            Columns = new Index<string>();
-            Columns.Values = new NDArray<string>();
-            Columns.Values.Data = null;
+            // Columns = new Index<string>();
+            Columns.values = new NDArray(typeof(string));
         }
 
         /*public NDArray<TData> this[string column]
@@ -55,6 +54,6 @@ namespace PandasNET
         protected Dictionary<string,NDArray<TData>> _ColumnArrayMapping;*/
         public Index<TIndex> Index {get;set;}
         public Index<string> Columns {get;set;}
-        public List<Series> Values { get; set; }
+        public NDArray Values { get; set; }
     }
 }
