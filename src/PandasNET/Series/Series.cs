@@ -27,5 +27,22 @@ namespace PandasNET
                 this[index] = value;
             }
         }
+
+        public object this[string idx]
+        {
+            get
+            {
+                int pos = -1;
+
+                switch (dtype.Name)
+                {
+                    case "Double":
+                        pos = Array.IndexOf(index.values.Chars, idx);
+                        return values.Double[pos];
+                }
+
+                return null;
+            }
+        }
     }
 }
