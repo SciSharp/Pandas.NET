@@ -8,11 +8,11 @@ namespace PandasNET
 {
     public class PandasObject
     {
-        public Type dtype { get; set; }
-
         public string name { get; set; }
 
         public NDArray values { get; set; }
+
+        public Type dtype => values.dtype;
 
         public int ndim => values.NDim;
 

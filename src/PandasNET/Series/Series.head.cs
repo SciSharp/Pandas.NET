@@ -1,6 +1,7 @@
 ﻿using NumSharp.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PandasNET
@@ -14,15 +15,16 @@ namespace PandasNET
         /// <returns></returns>
         public Series head(int n = 5)
         {
-            Series se = null;
-            var nd = new NDArray(dtype);
+            var nd = new NDArray(dtype, n);
 
             switch(dtype.Name)
             {
                 case "Double":
-                    se = new Series(nd);
+                    nd.Set(values.Double.Take(n).ToArray());
                     break;
             }
+
+            Series se = new Series(nd);
 
             return se;
         }

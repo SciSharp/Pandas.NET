@@ -12,5 +12,18 @@ namespace PandasNET
         {
             values = nd;
         }
+
+        public object this[int index]
+        {
+            get
+            {
+                return values[index];
+            }
+
+            set
+            {
+                this[index] = value;
+            }
+        }
     }
 }

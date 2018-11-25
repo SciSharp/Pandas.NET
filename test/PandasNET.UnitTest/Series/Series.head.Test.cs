@@ -7,16 +7,17 @@ using System.Text;
 namespace PandasNET.UnitTest
 {
     [TestClass]
-    public class Series
+    public class Series : TestBase
     {
-        NumPy np = new NumPy();
-
         [TestMethod]
         public void head()
         {
-            var pd = new Pandas();
             var nd = np.random.randn(10);
-            var s = pd.Series(nd);
+            var se = pd.Series(nd);
+            var hd = se.head();
+
+            Assert.IsTrue(hd.size == 5);
+            Assert.IsTrue(se[4].Equals(hd[4]));
         }
     }
 }
