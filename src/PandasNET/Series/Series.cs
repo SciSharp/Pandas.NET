@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PandasNET
 {
-    public class Series : PandasObject
+    public partial class Series : PandasObject
     {
         public Series(NDArray nd)
         {

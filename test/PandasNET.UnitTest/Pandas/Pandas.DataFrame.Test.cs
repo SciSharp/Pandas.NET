@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NumSharp;
 using NumSharp.Core;
-using PandasNET.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;

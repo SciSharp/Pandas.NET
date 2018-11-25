@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace PandasNET.Extensions
+namespace PandasNET
 {
     public static partial class PandasExtensions
     {
