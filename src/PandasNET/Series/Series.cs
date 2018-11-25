@@ -8,6 +8,8 @@ namespace PandasNET
 {
     public partial class Series : PandasObject
     {
+        public Index index { get; set; }
+
         public Series(NDArray nd)
         {
             values = nd;

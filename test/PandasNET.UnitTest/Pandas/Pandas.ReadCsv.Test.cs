@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PandasNET.UnitTest.Extensions
+namespace PandasNET.PandasUnitTest
 {
     [TestClass]
     public class PandasReadCsvTest

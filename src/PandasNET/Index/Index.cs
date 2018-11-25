@@ -7,11 +7,30 @@ using NumSharp.Core;
 
 namespace PandasNET
 {
-    public class Index<T> : PandasObject
+    /// <summary>
+    /// Immutable ndarray implementing an ordered, sliceable set. 
+    /// </summary>
+    public class Index : PandasObject
     {
+        public Index()
+        {
+
+        }
+
         public Index(NDArray array)
         {
 
+        }
+
+        public Index(params int[] items)
+        {
+            values = new NDArray(typeof(int), items.Length);
+        }
+
+        public Index(params string[] items)
+        {
+            values = new NDArray(typeof(string), items.Length);
+            values.Set(items);
         }
     }
 }

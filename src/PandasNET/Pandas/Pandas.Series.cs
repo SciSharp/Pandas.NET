@@ -8,9 +8,10 @@ namespace PandasNET
 {
     public static partial class PandasExtensions
     {
-        public static Series Series(this Pandas pd, NDArray nd)
+        public static Series Series(this Pandas pd, NDArray nd, Index index = null)
         {
             var res = new Series(nd);
+            res.index = index;
 
             return res;
         }

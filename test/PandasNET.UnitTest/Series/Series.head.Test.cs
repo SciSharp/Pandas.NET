@@ -1,10 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NumSharp.Core;
+using PandasNET.UnitTest;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PandasNET.UnitTest
+namespace PandasNET.SeriesUnitTest
 {
     [TestClass]
     public class Series : TestBase

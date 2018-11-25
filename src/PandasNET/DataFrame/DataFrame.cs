@@ -52,8 +52,8 @@ namespace PandasNET
             }
         } 
         protected Dictionary<string,NDArray<TData>> _ColumnArrayMapping;*/
-        public Index<TIndex> Index {get;set;}
-        public Index<string> Columns {get;set;}
+        public Index Index {get;set;}
+        public Index Columns {get;set;}
         public NDArray Values { get; set; }
     }
 }

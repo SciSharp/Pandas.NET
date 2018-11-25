@@ -1,19 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NumSharp;
 using NumSharp.Core;
+using PandasNET.UnitTest;
 
-namespace PandasNET.UnitTest
+namespace PandasNET.PandasUnitTest
 {
     [TestClass]
-    public class PandasTest
+    public class PandasTest : TestBase
     {
-        [TestMethod]
-        public void TestPandas()
-        {
-            var np = new NumPy();
-            var pd = new Pandas();
-            var nd = np.random.randn(10);
-            var s = pd.Series(nd);
-        }
+
     }
 }
