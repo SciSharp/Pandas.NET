@@ -14,10 +14,10 @@ namespace PandasNET
 
         public Type dtype => values.dtype;
 
-        public int ndim => values.NDim;
+        public int ndim => values.ndim;
 
-        public Shape shape => values.Shape;
+        public Shape shape => values.shape;
 
-        public int size => values.Size;
+        public int size => values.size;
     }
 }
