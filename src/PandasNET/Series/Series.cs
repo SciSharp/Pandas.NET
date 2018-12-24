@@ -37,8 +37,8 @@ namespace PandasNET
                 switch (dtype.Name)
                 {
                     case "Double":
-                        pos = Array.IndexOf(index.values.float64, idx);
-                        return values.float64[pos];
+                        pos = Array.IndexOf(index.values.Data<double>(), idx);
+                        return values.Data<double>()[pos];
                 }
 
                 return null;

@@ -16,7 +16,7 @@ namespace PandasNET
 
         public int ndim => values.ndim;
 
-        public Shape shape => values.shape;
+        public Shape shape => (Shape)values.Storage.Shape;
 
         public int size => values.size;
     }

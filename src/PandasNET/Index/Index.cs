@@ -30,7 +30,7 @@ namespace PandasNET
         public Index(params string[] items)
         {
             values = new NDArray(typeof(string), items.Length);
-            values.Set(items);
+            values.Storage.SetData(items);
         }
     }
 }

@@ -13,9 +13,8 @@ namespace PandasNET.PandasUnitTest
         [TestMethod]
         public void DataFrame()
         {
-            var np = new NumPy();
             var pd = new Pandas();
-            var array = np.random.randint(low: 0, high: 10, shape: new Shape(5, 5));
+            // var array = np.random.randint(low: 0, high: 10, shape: new Shape(5, 5));
             // var df = pd.DataFrame<int, >((NDArray<object>)array, columns: new string[] { "a", "b", "c", "d", "e" });
 
             /*var column1 = df["a"];

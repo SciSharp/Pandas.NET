@@ -46,12 +46,12 @@ namespace PandasNET
         public static DataFrame<TInd> DataFrame<TInd>(this Pandas pd, NDArray data, IList<TInd> index = null, IList<string> columns = null)
         {
 
-            var vectors = new NDArray[data.shape.Shapes[1]];
+            var vectors = new NDArray[data.shape[1]];
             
-            for (int idx = 0;idx < data.shape.Shapes[1];idx++)
+            for (int idx = 0;idx < data.shape[1];idx++)
             {
                 vectors[idx] = new NDArray(typeof(int));
-                for (int jdx = 0; jdx < data.shape.Shapes[0];jdx++)
+                for (int jdx = 0; jdx < data.shape[0];jdx++)
                 {
                     vectors[idx][jdx] = data[jdx,idx];
                 }

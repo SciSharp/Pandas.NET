@@ -7,12 +7,10 @@ namespace PandasNET.UnitTest
 {
     public class TestBase
     {
-        protected NumPy np;
         protected Pandas pd;
 
         public TestBase()
         {
-            np = new NumPy();
             pd = new Pandas();
         }
     }

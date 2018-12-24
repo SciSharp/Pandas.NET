@@ -20,7 +20,7 @@ namespace PandasNET
             switch(dtype.Name)
             {
                 case "Double":
-                    nd.Set(values.float64.Take(n).ToArray());
+                    nd.Storage.SetData(values.Data<double>().Take(n).ToArray());
                     break;
             }
 

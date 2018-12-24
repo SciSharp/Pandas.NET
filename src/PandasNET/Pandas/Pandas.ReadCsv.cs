@@ -44,7 +44,7 @@ namespace PandasNET
                 dtype.Add(ColumnHelper.Infer(headers[i], data[i]));
             }
 
-            var nd = new NumPy().array(data.ToArray());
+            var nd = np.array(data.ToArray());
             //var df = pd.DataFrame<int,double>(nd);
 
             return null;

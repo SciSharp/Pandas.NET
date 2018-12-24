@@ -31,7 +31,7 @@ namespace PandasNET
                 var nd = new NDArray(inferredDtype, properties.Length);
 
                 res = new Series(nd);
-                res.values.Set(properties.Select(x => x.GetValue(obj)).ToArray());
+                res.values.Storage.SetData(properties.Select(x => x.GetValue(obj)).ToArray());
                 res.index = new Index(properties.Select(x => x.Name).ToArray());
             }
 
