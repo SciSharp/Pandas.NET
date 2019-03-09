@@ -3,6 +3,17 @@
   <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>PandasNet</RootNamespace>
+    <Version>0.1.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Zhikui Hua, Haiping Chen</Authors>
+    <Company>SciSharp STACK</Company>
+    <Copyright>Apache 2.0</Copyright>
+    <PackageLicenseUrl>LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/SciSharp</PackageProjectUrl>
+    <PackageIconUrl>https://avatars3.githubusercontent.com/u/44989469?s=200&amp;v=4</PackageIconUrl>
+    <RepositoryUrl>https://github.com/SciSharp/Pandas.NET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Pandas</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
