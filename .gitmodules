@@ -1,0 +1,3 @@
+[submodule "src/NumSharp.Core"]
+	path = src/NumSharp.Core
+	url = git@github.com:huazhikui/NumSharp.git
