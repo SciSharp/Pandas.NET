@@ -18,8 +18,8 @@ namespace PandasNet.Test
 
         private void CreateSliceModel()
         {
-            int row = 5;
-            int col = 4;
+            int row = 500000;
+            int col = 40;
             var nd = np.random.randn(row, col);
             NDArray array = nd;
             //array.reshape(5, 4);
@@ -250,7 +250,8 @@ namespace PandasNet.Test
         {
             IDataFrame df1 = _dataFrame;
             var result = df1[(Slice)"::-1"];
-            Assert.Equal(df1.iloc[4][0], result.iloc[0][0]);
+            int index = df1.Index.Size - 1;
+            Assert.Equal(df1.iloc[index][0], result.iloc[0][0]);
         }
 
         [Fact]
