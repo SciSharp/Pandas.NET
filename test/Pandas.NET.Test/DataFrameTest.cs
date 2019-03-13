@@ -18,8 +18,8 @@ namespace PandasNet.Test
 
         private void CreateSliceModel()
         {
-            int row = 500000;
-            int col = 40;
+            int row = 5;
+            int col = 4;
             var nd = np.random.randn(row, col);
             NDArray array = nd;
             //array.reshape(5, 4);
