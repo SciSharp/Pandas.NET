@@ -10,5 +10,8 @@ namespace PandasNet
     public interface ISliceable<T>
     {
         T this[Slice s] { get; }
+
+        T this[SliceLabel s] { get; }
+
     }
 }
