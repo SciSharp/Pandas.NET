@@ -17,7 +17,13 @@ namespace PandasNet.Impl
         {
             this._rawIndex = index;
             this._rowSize = data.shape[0];
-            this._rawColumns = columns;
+            if (columns != null)
+            {
+                var cols = new List<string>() { };
+                this._rawColumns = cols;
+                cols.AddRange(columns);
+            }
+
             this._dtype = dtype;
 
             this.Values = data;
