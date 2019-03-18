@@ -67,7 +67,7 @@ namespace PandasNet.Impl
             switch (_sorter.Kind)
             {
                 case SortKind.quicksort:
-                    QuickSort_Edit(sortArray, 0, rowSize - 1, _sorter.Ascending);
+                    QuickSort(sortArray, 0, rowSize - 1, _sorter.Ascending);
                     break;
                 default:
                     throw new NotImplementedException("该种类排序方式尚未实现。");
@@ -152,12 +152,12 @@ namespace PandasNet.Impl
         /// <param name="begin">起始指针位置</param>
         /// <param name="end">结束指针位置</param>
         /// <param name="ascending">升序/降序，默认true升序</param>
-        private void QuickSort_Edit(object[,] arr, int begin, int end, bool ascending = true)
+        private void QuickSort(object[,] arr, int begin, int end, bool ascending = true)
         {
             if (begin >= end) return;   //两个指针重合就返回，结束调用
-            int pivotIndex = QuickSort_Once_Edit(arr, begin, end, ascending);  //会得到一个基准值下标
-            QuickSort_Edit(arr, begin, pivotIndex - 1, ascending);  //对基准的左端进行排序  递归
-            QuickSort_Edit(arr, pivotIndex + 1, end, ascending);   //对基准的右端进行排序  递归
+            int pivotIndex = QuickSortOnce(arr, begin, end, ascending);  //会得到一个基准值下标
+            QuickSort(arr, begin, pivotIndex - 1, ascending);  //对基准的左端进行排序  递归
+            QuickSort(arr, pivotIndex + 1, end, ascending);   //对基准的右端进行排序  递归
         }
 
         private delegate bool TempComparer(int value);
@@ -171,7 +171,7 @@ namespace PandasNet.Impl
         /// <param name="end">结束指针位置</param>
         /// <param name="ascending">升序/降序，默认true升序</param>
         /// <returns></returns>
-        private int QuickSort_Once_Edit(object[,] arr, int begin, int end, bool ascending)
+        private int QuickSortOnce(object[,] arr, int begin, int end, bool ascending)
         {
             object[,] pivot = GetRowByID(arr, begin);   //将首行作为基准
             int pivotLength = pivot.GetLength(1);
