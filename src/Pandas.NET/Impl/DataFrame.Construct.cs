@@ -137,7 +137,7 @@ namespace PandasNet.Impl
             DataIndex index = null;
             if (_rawColumns == null)
             {
-                index = new DataIndex(np.arange(Values.shape.Length));
+                index = new DataIndex(np.arange(Values.shape[1]));
             }
             else
             {

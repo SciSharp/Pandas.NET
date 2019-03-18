@@ -19,7 +19,7 @@ namespace PandasNet.Test
 
         private void CreateSliceModel()
         {
-            int row = 1000000;
+            int row = 1000;
             int col = 20;
             var nd = np.random.randn(row, col);
             NDArray array = nd;
@@ -315,6 +315,8 @@ namespace PandasNet.Test
             var result = df.sort_values(columns.ToArray());
             DateTime endTime = DateTime.Now;
             var time = (endTime - startTime).TotalMilliseconds;
+            //string sourStr = ShowDataFrameValues(df);
+            //string resStr = ShowDataFrameValues(result);
             string index = columns[0];
             var col=result[index];
 
@@ -344,6 +346,23 @@ namespace PandasNet.Test
             {
                 Assert.True(Convert.ToDecimal(col[i]) >= Convert.ToDecimal(col[i + 1]));
             }
+        }
+
+
+        private string ShowDataFrameValues(IDataFrame dataFrame)
+        {
+            int rowLength = dataFrame.Index.Size;
+            int colLength = dataFrame.Columns.Size;
+            StringBuilder sb = new StringBuilder();
+            for(int r=0;r<rowLength;r++)
+            {
+                for(int c=0;c<colLength;c++ )
+                {
+                    sb.Append(dataFrame[c][r]+"\t");
+                }
+                sb.AppendLine();
+            }
+            return sb.ToString();
         }
     }
 }
