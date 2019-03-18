@@ -13,7 +13,7 @@ namespace PandasNet.Impl
 
         public Sorter(IDataFrame dataFrame, List<string> columnNames, SortType type=SortType.ascending, SortKind kind = SortKind.quicksort)
         {
-            _dataFrame = dataFrame;
+            _dataFrame = dataFrame ?? throw new ArgumentNullException("IDataFrame不能为null。");
             _columnNames = columnNames;
             Type = type;
             Kind = kind;
@@ -21,7 +21,7 @@ namespace PandasNet.Impl
 
         public Sorter(IDataFrame dataFrame, List<int> columnIndexs, SortType type = SortType.ascending, SortKind kind = SortKind.quicksort)
         {
-            _dataFrame = dataFrame;
+            _dataFrame = dataFrame ?? throw new ArgumentNullException("IDataFrame不能为null。");
             _columnIndexs = columnIndexs;
             Type = type;
             Kind = kind;
