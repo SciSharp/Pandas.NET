@@ -19,8 +19,8 @@ namespace PandasNet.Test
 
         private void CreateSliceModel()
         {
-            int row = 1000;
-            int col = 20;
+            int row = 3;
+            int col = 4;
             var nd = np.random.randn(row, col);
             NDArray array = nd;
             //array.reshape(5, 4);
@@ -359,8 +359,9 @@ namespace PandasNet.Test
             {
                 indexs.Add(i);
             }
+            //var str = ShowDataFrameValues(_dataFrame);
             var result = df.sort_values(indexs.ToArray());
-
+            //var str2 = ShowDataFrameValues(result);
             int index = indexs[0];
             var col = result[index];
 
