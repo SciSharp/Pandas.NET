@@ -2,6 +2,7 @@
 using PandasNet.Impl;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -18,8 +19,8 @@ namespace PandasNet.Test
 
         private void CreateSliceModel()
         {
-            int row = 5;
-            int col = 4;
+            int row = 1000000;
+            int col = 20;
             var nd = np.random.randn(row, col);
             NDArray array = nd;
             //array.reshape(5, 4);
@@ -163,8 +164,8 @@ namespace PandasNet.Test
         public void Slice_Row_Desc_Test()
         {
             IDataFrame df1 = _dataFrame;
-            var sobj1 = df1.loc["row5"];
-            var sobj2 = df1.loc["row4"];
+            var sobj1 = df1.iloc[df1.Index.Size-1]; 
+            var sobj2 = df1.iloc[df1.Index.Size - 2];
             var dfSl1 = df1[(Slice)"::-1"];
             var obj1 = dfSl1.iloc[0];
             var obj2 = dfSl1.iloc[1];
@@ -173,8 +174,8 @@ namespace PandasNet.Test
             Assert.Equal(sobj2[0], obj2[0]);
             Assert.Equal(sobj2[1], obj2[1]);
             var dfSl2 = df1[(Slice)"-3:1:1"];
-            sobj1 = df1.loc["row3"];
-            sobj2 = df1.loc["row4"];
+            sobj1 = df1.iloc[df1.Index.Size-3];
+            sobj2 = df1.iloc[df1.Index.Size - 2];
             obj1 = dfSl2.iloc[0];
             obj2 = dfSl2.iloc[1];
             Assert.Equal(sobj1[0], obj1[0]);
@@ -182,8 +183,8 @@ namespace PandasNet.Test
             Assert.Equal(sobj2[0], obj2[0]);
             Assert.Equal(sobj2[1], obj2[1]);
             var dfSl3 = df1[(Slice)"-3:1:-1"];
-            sobj1 = df1.loc["row1"];
-            sobj2 = df1.loc["row5"];
+            sobj1 = df1.iloc[0];
+            sobj2 = df1.iloc[df1.Index.Size - 1];
             obj1 = dfSl3.iloc[0];
             obj2 = dfSl3.iloc[1];
             Assert.Equal(sobj1[0], obj1[0]);
@@ -276,6 +277,73 @@ namespace PandasNet.Test
             IDataFrame df1 = _dataFrame;
             var result = df1[(SliceLabel)"row3:"];
             Assert.Equal(df1.iloc[2][0], result.iloc[0][0]);
+        }
+
+        [Fact]
+        public void Sort_Test()
+        {
+            IDataFrame df = _dataFrame;
+            int sortNum = 1;
+            #region test
+            //int[] arr1 = { 5, 3, 1, 4, 1 };
+            //int[] arr2 = { 6, 2, 8, 7, 9 };
+            //int[] arr3 = { 9, 8, 7, 2, 1 };
+            //int[] arr4 = { 1, 2, 9, 8, 7 };
+            //int[] arr5 = { 2, 3, 8, 1, 9 };
+            //var dict = new Dictionary<string, NDArray>
+            //{
+            //   { "col1",np.array(arr1,typeof(object)) },
+            //   { "col2",np.array(arr2,typeof(object))},
+            //   { "col3",np.array(arr3,typeof(object)) },
+            //   { "col4",np.array(arr4,typeof(object)) },
+            //   { "col5",np.array(arr5,typeof(object)) },
+            //};
+
+            //var pd = new Pandas();
+            //var df = pd.DataFrame<string>(dict, new string[] {
+            //    "row1","row2","row3","row4","row5"
+            //});
+            #endregion
+            List<string> columns = new List<string>();
+            int r = new Random().Next(0,df.Columns.Size/2);
+            int size = df.Columns.Size;
+            for (int i=0;i< size; i+= (size/sortNum))
+            {
+                columns.Add(df[i].Name.ToString());
+            }
+            DateTime startTime = DateTime.Now;
+            var result = df.sort_values(columns.ToArray());
+            DateTime endTime = DateTime.Now;
+            var time = (endTime - startTime).TotalMilliseconds;
+            string index = columns[0];
+            var col=result[index];
+
+            for(int i=0;i<result.Index.Size-1;i++)
+            {
+                Assert.True(Convert.ToDecimal(col[i]) <= Convert.ToDecimal(col[i + 1]));
+            }
+        }
+
+        [Fact]
+        public void Sort_Desc_Test()
+        {
+            IDataFrame df = _dataFrame;
+
+            List<string> columns = new List<string>();
+            int r = new Random().Next(0, df.Columns.Size / 2);
+            for (int i = 0; i < df.Columns.Size; i += r)
+            {
+                columns.Add(df[i].Name.ToString());
+            }
+            var result = df.sort_values(columns.ToArray(),false);
+
+            string index = columns[0];
+            var col = result[index];
+
+            for (int i = 0; i < result.Index.Size - 1; i++)
+            {
+                Assert.True(Convert.ToDecimal(col[i]) >= Convert.ToDecimal(col[i + 1]));
+            }
         }
     }
 }

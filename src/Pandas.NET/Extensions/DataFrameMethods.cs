@@ -1,6 +1,8 @@
-﻿using PandasNet.Impl;
+﻿using NumSharp.Core;
+using PandasNet.Impl;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PandasNet
@@ -45,5 +47,17 @@ namespace PandasNet
             return new DataFrameGroupBy(df, grouper);
         }
         #endregion
+
+        public static IDataFrame sort_values(this IDataFrame df, string[] columns, bool ascending = true, SortKind kind = SortKind.quicksort)
+        {
+            var sorter = new Sorter()
+            {
+                Ascending = ascending,
+                Kind = kind,
+                ColumnNames = columns.ToList()
+            };
+            var sort = new DataFrameSort(df, sorter);
+            return sort.ExcuteSort();
+        }
     }
 }
