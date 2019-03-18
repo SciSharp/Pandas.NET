@@ -88,7 +88,7 @@ namespace PandasNet.Impl
             {
                 for (int r = 0; r < rowSize; r++)
                 {
-                    objs[ins] = value.GetValue(indexs[r] + c * colSize);
+                    objs[ins] = value.GetValue(indexs[r] + c *rowSize);
                     ins++;
                 }
             }
