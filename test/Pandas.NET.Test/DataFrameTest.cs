@@ -359,7 +359,7 @@ namespace PandasNet.Test
             {
                 indexs.Add(i);
             }
-            var result = df.sort_index(indexs.ToArray());
+            var result = df.sort_values(indexs.ToArray());
 
             int index = indexs[0];
             var col = result[index];
@@ -381,7 +381,7 @@ namespace PandasNet.Test
             {
                 indexs.Add(i);
             }
-            var result = df.sort_index(indexs.ToArray(),false);
+            var result = df.sort_values(indexs.ToArray(),false);
 
             int index = indexs[0];
             var col = result[index];
