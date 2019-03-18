@@ -9,22 +9,22 @@ namespace PandasNet
         /// <summary>
         /// 需要排序的列名集合
         /// </summary>
-        List<string> ColumnNames { get; set; }
+        List<string> ColumnNames { get;  }
 
         /// <summary>
         /// 需要排序的列索引集合
         /// </summary>
-        List<int> ColumnIndexs { get; set; }
+        List<int> ColumnIndexs { get; }
 
         /// <summary>
         /// 升序/降序
         /// </summary>
-        bool Ascending { get; set; }
+        bool Ascending { get; }
 
         /// <summary>
         /// 排序种类
         /// </summary>
-        SortKind Kind { get; set; }
+        SortKind Kind { get;}
     }
 
     public enum SortKind

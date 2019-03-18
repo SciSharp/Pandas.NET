@@ -25,8 +25,7 @@ namespace PandasNet.Impl
             var colSize = _dataFrame.Columns.Size;
             //总行数
             var rowSize = _dataFrame.Index.Size;
-            object[,] sortArray = null;
-            List<SeriesBase> seriesBases = new List<SeriesBase>();
+            List<SeriesBase> _seriesBases = new List<SeriesBase>();
             if (_sorter.ColumnIndexs != null && _sorter.ColumnIndexs.Any())//根据列索引获取排序列
             {
                 var cols = _sorter.ColumnIndexs;
@@ -34,21 +33,12 @@ namespace PandasNet.Impl
 
                 for (int c = 0; c < colLength; c++)
                 {
-                    seriesBases.Add(_dataFrame[cols[c]]);
+                    _seriesBases.Add(_dataFrame[cols[c]]);
                 }
             }
-            else if (_sorter.ColumnNames != null && _sorter.ColumnNames.Any())//根据列名获取排序列
-            {
-                var cols = _sorter.ColumnNames;
-                var colLength = cols.Count;
-
-                for (int c = 0; c < colLength; c++)
-                {
-                    seriesBases.Add(_dataFrame[cols[c]]);
-                }
-            }
-            int seriesLength = seriesBases.Count;
+            int seriesLength = _seriesBases.Count;
             int sortLength = seriesLength + 1;
+            object[,] sortArray = null;
             sortArray = new object[rowSize, sortLength];//多一列，追加行下标
             for (int c = 0; c < sortLength; c++)//多一列，追加行下标
             {
@@ -56,7 +46,7 @@ namespace PandasNet.Impl
                 {
                     if (c < seriesLength)
                     {
-                        sortArray[r, c] = seriesBases[c][r];
+                        sortArray[r, c] = _seriesBases[c][r];
                     }
                     else
                     {   //记录行下标

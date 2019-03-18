@@ -283,7 +283,7 @@ namespace PandasNet.Test
         public void Sort_Test()
         {
             IDataFrame df = _dataFrame;
-            int sortNum = 1;
+            int sortNum = 2;
             #region test
             //int[] arr1 = { 5, 3, 1, 4, 1 };
             //int[] arr2 = { 6, 2, 8, 7, 9 };
@@ -347,6 +347,51 @@ namespace PandasNet.Test
                 Assert.True(Convert.ToDecimal(col[i]) >= Convert.ToDecimal(col[i + 1]));
             }
         }
+
+        [Fact]
+        public void Sort_Index_Test()
+        {
+            IDataFrame df = _dataFrame;
+
+            List<int> indexs = new List<int>();
+            int r = new Random().Next(0, df.Columns.Size / 2);
+            for (int i = 0; i < df.Columns.Size; i += r)
+            {
+                indexs.Add(i);
+            }
+            var result = df.sort_index(indexs.ToArray());
+
+            int index = indexs[0];
+            var col = result[index];
+
+            for (int i = 0; i < result.Index.Size - 1; i++)
+            {
+                Assert.True(Convert.ToDecimal(col[i]) <= Convert.ToDecimal(col[i + 1]));
+            }
+        }
+
+        [Fact]
+        public void Sort_Index_Desc_Test()
+        {
+            IDataFrame df = _dataFrame;
+
+            List<int> indexs = new List<int>();
+            int r = new Random().Next(0, df.Columns.Size / 2);
+            for (int i = 0; i < df.Columns.Size; i += r)
+            {
+                indexs.Add(i);
+            }
+            var result = df.sort_index(indexs.ToArray(),false);
+
+            int index = indexs[0];
+            var col = result[index];
+
+            for (int i = 0; i < result.Index.Size - 1; i++)
+            {
+                Assert.True(Convert.ToDecimal(col[i]) >= Convert.ToDecimal(col[i + 1]));
+            }
+        }
+
 
 
         private string ShowDataFrameValues(IDataFrame dataFrame)

@@ -50,12 +50,14 @@ namespace PandasNet
 
         public static IDataFrame sort_values(this IDataFrame df, string[] columns, bool ascending = true, SortKind kind = SortKind.quicksort)
         {
-            var sorter = new Sorter()
-            {
-                Ascending = ascending,
-                Kind = kind,
-                ColumnNames = columns.ToList()
-            };
+            var sorter = new Sorter(df, columns.ToList(), ascending, kind);
+            var sort = new DataFrameSort(df, sorter);
+            return sort.ExcuteSort();
+        }
+
+        public static IDataFrame sort_index(this IDataFrame df, int[] indexs, bool ascending = true, SortKind kind = SortKind.quicksort)
+        {
+            var sorter = new Sorter(df, indexs.ToList(), ascending, kind);
             var sort = new DataFrameSort(df, sorter);
             return sort.ExcuteSort();
         }
