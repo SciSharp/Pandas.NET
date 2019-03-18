@@ -57,7 +57,7 @@ namespace PandasNet.Impl
             switch (_sorter.Kind)
             {
                 case SortKind.quicksort:
-                    QuickSort(sortArray, 0, rowSize - 1, _sorter.Ascending);
+                    QuickSort(sortArray, 0, rowSize - 1, _sorter.Type==SortType.ascending?true:false);
                     break;
                 default:
                     throw new NotImplementedException("该种类排序方式尚未实现。");

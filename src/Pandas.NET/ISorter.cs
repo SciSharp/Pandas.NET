@@ -7,11 +7,6 @@ namespace PandasNet
     public interface ISorter
     {
         /// <summary>
-        /// 需要排序的列名集合
-        /// </summary>
-        List<string> ColumnNames { get;  }
-
-        /// <summary>
         /// 需要排序的列索引集合
         /// </summary>
         List<int> ColumnIndexs { get; }
@@ -19,12 +14,27 @@ namespace PandasNet
         /// <summary>
         /// 升序/降序
         /// </summary>
-        bool Ascending { get; }
+        SortType Type { get; }
 
         /// <summary>
         /// 排序种类
         /// </summary>
         SortKind Kind { get;}
+    }
+
+    /// <summary>
+    /// 排序类型
+    /// </summary>
+    public enum SortType
+    {
+        /// <summary>
+        /// 升序
+        /// </summary>
+        ascending,
+        /// <summary>
+        /// 降序
+        /// </summary>
+        descending
     }
 
     public enum SortKind

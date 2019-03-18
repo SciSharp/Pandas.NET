@@ -11,39 +11,20 @@ namespace PandasNet.Impl
         private List<string> _columnNames;
         private List<int> _columnIndexs;
 
-        public Sorter(IDataFrame dataFrame, List<string> columnNames, bool ascending = true, SortKind kind = SortKind.quicksort)
+        public Sorter(IDataFrame dataFrame, List<string> columnNames, SortType type=SortType.ascending, SortKind kind = SortKind.quicksort)
         {
             _dataFrame = dataFrame;
             _columnNames = columnNames;
-            Ascending = ascending;
+            Type = type;
             Kind = kind;
         }
 
-        public Sorter(IDataFrame dataFrame, List<int> columnIndexs, bool ascending = true, SortKind kind = SortKind.quicksort)
+        public Sorter(IDataFrame dataFrame, List<int> columnIndexs, SortType type = SortType.ascending, SortKind kind = SortKind.quicksort)
         {
             _dataFrame = dataFrame;
             _columnIndexs = columnIndexs;
-            Ascending = ascending;
+            Type = type;
             Kind = kind;
-        }
-
-        /// <summary>
-        /// 需要排序的列名集合
-        /// </summary>
-        public List<string> ColumnNames
-        {
-            get
-            {
-                if (_columnNames != null)
-                {
-                    return _columnNames;
-                }
-                else
-                {
-                    var columnLabels = _columnIndexs.Select(x => _dataFrame.Columns.Values[x].ToString()).ToList();
-                    return columnLabels;
-                }
-            }
         }
 
         /// <summary>
@@ -59,7 +40,7 @@ namespace PandasNet.Impl
                 }
                 else
                 {
-                    var str = _dataFrame.Columns.GetPosition(ColumnNames.ToArray());
+                    var str = _dataFrame.Columns.GetPosition(_columnNames.ToArray());
                     return str.ToList();
                 }
             }
@@ -68,7 +49,7 @@ namespace PandasNet.Impl
         /// <summary>
         /// 升序/降序,默认升序True
         /// </summary>
-        public bool Ascending { get; }
+        public SortType Type { get; }
 
         /// <summary>
         /// 排序种类
