@@ -306,6 +306,8 @@ namespace PandasNet.Test
             #endregion
             List<string> columns = new List<string>();
             int r = new Random().Next(0,df.Columns.Size/2);
+            if (r == 0)
+                r = df.Columns.Size;
             int size = df.Columns.Size;
             for (int i=0;i< size; i+= (size/sortNum))
             {
@@ -333,6 +335,8 @@ namespace PandasNet.Test
 
             List<string> columns = new List<string>();
             int r = new Random().Next(0, df.Columns.Size / 2);
+            if (r == 0)
+                r = df.Columns.Size;
             for (int i = 0; i < df.Columns.Size; i += r)
             {
                 columns.Add(df[i].Name.ToString());
@@ -378,6 +382,8 @@ namespace PandasNet.Test
 
             List<int> indexs = new List<int>();
             int r = new Random().Next(0, df.Columns.Size / 2);
+            if (r == 0)
+                r = df.Columns.Size;
             for (int i = 0; i < df.Columns.Size; i += r)
             {
                 indexs.Add(i);
