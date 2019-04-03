@@ -7,11 +7,11 @@ namespace PandasNet
 {
     public class Slice 
     {
-        public int Start { private set; get; }
+        public int Start { protected set; get; }
 
-        public int End { private set; get; }
+        public int End { protected set; get; }
 
-        public int Step { private set; get; }
+        public int Step { protected set; get; }
 
         /// <summary>
         ///
@@ -28,7 +28,8 @@ namespace PandasNet
             {
                 throw new ArgumentNullException("the sliceRule is null or empty");
             }
-            Regex regex = new Regex(@"(?<start>\d*):(?<end>\d*):?(?<step>\d*)");
+            //Regex regex = new Regex(@"(?<start>(-\d*)|(\d*)):(?<end>(-\d*)|(\d*)):?(?<step>(-\d*)|(\d*))");
+            Regex regex = new Regex(@"(?<start>-?\d*):(?<end>-?\d*):?(?<step>-?\d*)");
             Match match = regex.Match(sliceRule);
 
             Start = 0;
@@ -43,6 +44,7 @@ namespace PandasNet
                 Start = !string.IsNullOrEmpty(start) ? Convert.ToInt32(start) : Start;
                 End = !string.IsNullOrEmpty(end) ? Convert.ToInt32(end) : End;
                 Step = !string.IsNullOrEmpty(step) ? Convert.ToInt32(step) : Step;
+                Step = Step == 0 ? 1 : Step;
             }
             else
             {

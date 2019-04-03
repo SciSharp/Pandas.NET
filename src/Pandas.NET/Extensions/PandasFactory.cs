@@ -17,18 +17,24 @@ namespace PandasNet
         /// <param name="data"></param>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static SeriesBase Series<T>(this Pandas pd, T[] data, IDataIndex index = null)
-            where T : struct
+        public static SeriesBase Series(this Pandas pd, Array data)
         {
-            Series series = new Series(data)
-            {
-                Index = index
-            };
+            Series series = new Series(data);
             return series;
         }
 
-        public static SeriesBase Series<T>(this Pandas pd, T data, IDataIndex index = null)
+        public static SeriesBase Series(this Pandas pd, NDArray data)
         {
+            Series series = new Series(data);
+            return series;
+        }
+
+        public static SeriesBase Series<T>(this Pandas pd, T data)
+        {
+            if(data is Array)
+            {
+              return pd.Series(data as Array);
+            }
             Series res = null;
             Type type = data.GetType();
             var properties = type.GetProperties();

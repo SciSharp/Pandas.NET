@@ -190,28 +190,163 @@ namespace PandasNet.Impl
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public IDataFrame this[Slice s] {
+        public IDataFrame this[Slice s]
+        {
             get
             {
                 List<object> objs = new List<object>();
+                List<TIndex> indexs = null;
+                if (_rawIndex != null)
+                    indexs = new List<TIndex>();
                 NDArray nDArray = null;
                 //验证长度
-                var lengthVail = Values.size / Values.ndim;
+                var lengthVail = Values.size / Values.Storage.Shape.BiShape.Item2;
                 var length = s.End;
                 if (s.End > lengthVail)
                     length = lengthVail;
-                for (int i=s.Start;i< length; i+=s.Step)
+                //验证开始和结束位置
+                VailStartAndEnd(s.Start, length, lengthVail);
+                bool desc = s.Step < 0;
+                int start = s.Start;
+                //修正start和length,降序
+                if (desc)
                 {
-                    var value = Values[i] as NDArray;
+                    start = length-1;
+                    length = s.Start;
+                }
+                for (int i = start; Calc(i, length, desc); i += s.Step)
+                {
+                    //获取下标
+                    int index = GetIndex(i, lengthVail);
+                    if (_rawIndex != null)
+                        indexs.Add(_rawIndex[index]);
+                    var value = Values[index] as NDArray;
                     objs.AddRange(value.Storage.GetData<object>());
                 }
-                nDArray=np.array(objs.ToArray(),Values.Storage.DType);
-                nDArray.reshape(objs.Count/ Values.ndim, Values.ndim);
-                var result= new DataFrame<TIndex>(nDArray, null, _rawColumns,_dtype);
+                nDArray = np.array(objs.ToArray(), Values.Storage.DType);
+                int ndim = Columns.Size;
+                nDArray.reshape(objs.Count / ndim, ndim);
+                var result = new DataFrame<TIndex>(nDArray, indexs, _rawColumns, _dtype);
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 判断计算
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="length"></param>
+        /// <param name="desc"></param>
+        /// <param name="label"></param>
+        /// <returns></returns>
+        private bool Calc(int i, int length, bool desc, bool label = false)
+        {
+            if (desc && !label)
+                return i > length;
+            else if (desc && label)
+            {
+                return i >= length;
+            }
+            else if (!desc && label)
+            {
+                return i <= length;
+            }
+            else
+                return i < length;
+        }
+
+        /// <summary>
+        /// 获取实际的下标值
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        private int GetIndex(int value, int length)
+        {
+            if (value >= 0)
+                return value;
+            else
+                return length + value;
+        }
+
+        /// <summary>
+        /// 验证开始和结束位置
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="lengthVail"></param>
+        private void VailStartAndEnd(int start, int end, int lengthVail)
+        {
+            if (start > end)
+                throw new ArgumentException("开始位置不能大于结束位置");
+            if(start*end<0)
+            {
+                if (Math.Abs(start) + Math.Abs(end) > lengthVail)
+                    throw new ArgumentException("开始位置和结束位置之和不能大于总长度");
+            }
+        }
+
+        /// <summary>
+        /// 切片
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public IDataFrame this[SliceLabel s]
+        {
+            get
+            {
+                List<object> objs = new List<object>();
+                List<TIndex> indexs = null;
+                if (_rawIndex != null)
+                    indexs = new List<TIndex>();
+                NDArray nDArray = null;
+                //转换获取的标签行索引
+                int start = 0;
+                int end = int.MaxValue;
+
+                if (!string.IsNullOrEmpty(s.StartLabel))
+                {
+                    start = Index.GetPosition(s.StartLabel);
+                }
+                if (!string.IsNullOrEmpty(s.EndLabel))
+                {
+                    end = Index.GetPosition(s.EndLabel);
+                }
+                //验证长度
+                var lengthVail = Values.size / Values.Storage.Shape.BiShape.Item2 - 1;
+                var length = end;
+                if (end > lengthVail)
+                    length = lengthVail;
+
+                //验证开始和结束位置
+                VailStartAndEnd(start, length, lengthVail);
+                bool desc = s.Step < 0;
+                //修正start和length,降序
+                if (desc)
+                {
+                    int temp = start;
+                    start = length-1;
+                    length = temp;
+                }
+                for (int i = start; Calc(i, length, desc, true); i += s.Step)
+                {
+                    //获取下标
+                    int index = GetIndex(i, lengthVail);
+                    if (_rawIndex != null)
+                        indexs.Add(_rawIndex[index]);
+                    var value = Values[index] as NDArray;
+                    objs.AddRange(value.Storage.GetData<object>());
+                }
+                nDArray = np.array(objs.ToArray(), Values.Storage.DType);
+                int ndim = Columns.Size;
+                nDArray.reshape(objs.Count / ndim, ndim);
+                var result = new DataFrame<TIndex>(nDArray, indexs, _rawColumns, _dtype);
                 return result;
             }
 
         }
+
+
 
         public IDataFrame Head(int rowSize)
         {
