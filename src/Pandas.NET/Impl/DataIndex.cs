@@ -25,6 +25,7 @@ namespace PandasNet.Impl
 
         public int GetPosition<T>(T key)
         {
+            var data = Values.Data<T>();
             var pos = Array.IndexOf(Values.Data<T>(), key);
             return pos;
         }

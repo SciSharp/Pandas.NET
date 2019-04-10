@@ -37,7 +37,7 @@ namespace PandasNet.Iteration.Impl
                 }
                 return new Series(array)
                 {
-                    Name = _dataFrame.Index.Values.Storage.GetData<object>()[row],
+                    Name = _dataFrame.Index.Values.Storage.GetData().GetValue(row),
                     Index = _dataFrame.Columns
                 };
             }

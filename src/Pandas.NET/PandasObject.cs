@@ -9,12 +9,12 @@ namespace PandasNet
     {
         public object Name { get; set; }
 
-        public NDArray Values { get; set; }
+        public virtual NDArray Values { get; set; }
 
         /// <summary>
         /// NDArray的数据类型
         /// </summary>
-        public Type DType => Values.dtype;
+        public  Type DType => Values.dtype;
 
         /// <summary>
         /// 维度
@@ -24,11 +24,11 @@ namespace PandasNet
         /// <summary>
         /// 
         /// </summary>
-        public Shape Shape => Values.Storage.Shape;
+        public virtual Shape Shape => Values.Storage.Shape;
 
         /// <summary>
         /// 元素总数
         /// </summary>
-        public int Size => Values.size;
+        public virtual int Size => Values.size;
     }
 }

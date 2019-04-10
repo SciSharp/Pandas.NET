@@ -12,8 +12,9 @@
   * `pd.DataFrame(IDictionary<string, NDArray> data, IList<string> index)`
   * `pd.DataFrame<TIndex>(IDictionary<string, NDArray> data, IList<TIndex> index)`
 * Series
-  * `pd.Series(NDArray data, IDataIndex index=null)`
-  * `pd.Series<T>(T data, IDataIndex index=null)`
+  * `pd.Series(NDArray data)`
+  * `pd.Series(Array data)`
+  * `pd.Series<T>(T data)`
 
 ### 2.  Series
 
@@ -40,7 +41,7 @@
 * `df[params string[] columnLabels]`：按列标签选取数据（返回DataFrame）
 * `df.Column(string columnLabel, NDArray value)`:设置列以及列的值；当列不存在时创建
 * `df.Column(int columnIndex, NDArray value)`:设置列以及列的值；当列不存在时报异常
-* df[Slice s]:行切片选取数据
+* `df[Slice s]`:行切片选取数据
 
 * `df.loc["index_label"]`：按行索引标签选取数据
 * `df.loc["index_label", "column_label"]`：按行和列标签选取数据
