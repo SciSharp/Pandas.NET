@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,11 +70,11 @@ namespace PandasNet.Impl
 
         private static IDataFrame CreateDataFrame(IDataFrame df, List<int> indexs)
         {
-            var value = df.Values.Storage.GetData();
+            var value = df.Values.Array;
             int colSize = df.Columns.Size;
             int rowSize = df.Index.Size;
-            var cols = df.Columns.Values.Storage.GetData();
-            var rows = df.Index.Values.Storage.GetData();
+            var cols = df.Columns.Values.Array;
+            var rows = df.Index.Values.Array;
             var rowArray = Array.CreateInstance(df.Index.DType, rows.Length);
             int index = 0;
             foreach (var ind in indexs)
@@ -93,11 +93,11 @@ namespace PandasNet.Impl
                 }
             }
             NDArray nDArray = new NDArray(df.DType, new Shape(rowSize, colSize));
-            nDArray.Storage.SetData(objs);
+            nDArray.SetData(objs);
             var pd = new Pandas();
             IDataFrame dataFrame = pd.DataFrame(nDArray, null, null, df.DType);
-            dataFrame.Index.Values.Storage.SetData(rowArray, df.Index.DType);
-            dataFrame.Columns.Values.Storage.SetData(cols, df.Columns.DType);
+            dataFrame.Index.Values.SetData(rowArray);
+            dataFrame.Columns.Values.SetData(cols);
             return dataFrame;
         }
 

@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using PandasNet.Impl;
 using System;
 using System.Collections.Generic;

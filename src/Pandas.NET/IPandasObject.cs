@@ -1,5 +1,5 @@
 ﻿using System;
-using NumSharp.Core;
+using NumSharp;
 
 namespace PandasNet
 {

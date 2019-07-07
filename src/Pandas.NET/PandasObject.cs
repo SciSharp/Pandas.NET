@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +24,7 @@ namespace PandasNet
         /// <summary>
         /// 
         /// </summary>
-        public virtual Shape Shape => Values.Storage.Shape;
+        public virtual Shape Shape => Values.shape;
 
         /// <summary>
         /// 元素总数

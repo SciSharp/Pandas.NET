@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,17 +61,17 @@ namespace PandasNet.Impl
             var labels = new object[size];
             for (var i = 0; i < size; i++)
             {
-                var index = Convert.ToInt32(indices[i]);
+                var index = Convert.ToInt32((object)indices[i]);
                 var row = _dataFrame.iloc[index];
                 for (var j = 0; j < colSize; j++)
                 {
-                    array[i, j] = row[j];
+                    array[i, j].SetData(row[j]);
                 }
 
                 labels[i] = _keySeries.Index.Values[index];
             }
 
-            return new DataFrame<object>(array, labels, _dataFrame.Columns.Values.Storage.GetData<string>(), typeof(object));
+            return new DataFrame<object>(array, labels, _dataFrame.Columns.Values.Data<string>(), typeof(object));
         }
 
         protected virtual void ExcuteGrouper()

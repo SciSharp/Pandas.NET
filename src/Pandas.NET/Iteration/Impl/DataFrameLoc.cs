@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using PandasNet.Impl;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace PandasNet.Iteration.Impl
                 }
                 return new Series(array)
                 {
-                    Name = _dataFrame.Index.Values.Storage.GetData().GetValue(row),
+                    Name = _dataFrame.Index.Values.Array.GetValue(row),
                     Index = _dataFrame.Columns
                 };
             }

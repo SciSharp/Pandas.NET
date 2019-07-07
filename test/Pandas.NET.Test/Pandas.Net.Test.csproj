@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NumSharp.Core\src\NumSharp.Core\NumSharp.Core.csproj" />
     <ProjectReference Include="..\..\src\Pandas.NET\Pandas.NET.csproj" />
   </ItemGroup>
 

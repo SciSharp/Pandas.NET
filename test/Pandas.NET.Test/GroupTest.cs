@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using PandasNet.Impl;
-using NumSharp.Core;
+using NumSharp;
 
 namespace PandasNet.Test
 {
@@ -29,7 +29,6 @@ namespace PandasNet.Test
             var group = gro.Groups;
             var a = gro.Groups[1];
             Assert.Equal("row2", a.Values[0]);
-
         }
     }
 }

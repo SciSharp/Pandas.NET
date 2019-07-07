@@ -35,7 +35,7 @@ namespace PandasNet.Test
             var series1 = pd.Series(new { a = 1, b = "2" });
             var series2 = pd.Series(new { a = 2, b = 2 });
             var nd = series1 + series2;
-            Assert.Equal(3m, nd[0]);
+            Assert.Equal(3m, (decimal)nd[0]);
             Assert.Equal("22", nd[1]);
         }
 
@@ -45,7 +45,7 @@ namespace PandasNet.Test
             var series1 = pd.Series(new { a = 1, b = "2" });
             var series2 = pd.Series(new { a = 2, b = 2 });
             var nd = series1 - series2;
-            Assert.Equal(-1m, nd[0]);
+            Assert.Equal(-1m, (decimal)nd[0]);
             Assert.Null(nd[1]);
         }
 
@@ -55,8 +55,8 @@ namespace PandasNet.Test
             var series1 = pd.Series(new { a = 1, b = "2" });
             var series2 = pd.Series(new { a = 2, b = 2 });
             var nd = series1 * series2;
-            Assert.Equal(2m, nd[0]);
-            Assert.Equal(4m, nd[1]);
+            Assert.Equal(2m, (decimal)nd[0]);
+            Assert.Equal(4m, (decimal)nd[1]);
         }
 
         [Fact]
@@ -65,8 +65,8 @@ namespace PandasNet.Test
             var series1 = pd.Series(new { a = 1, b = "2", c = 1 });
             var series2 = pd.Series(new { a = 2, b = 2, c = 0 });
             var nd = series1 / series2;
-            Assert.Equal(0.5m, nd[0]);
-            Assert.Equal(1m, nd[1]);
+            Assert.Equal(0.5m, (decimal)nd[0]);
+            Assert.Equal(1m, (decimal)nd[1]);
             Assert.Null(nd[2]);
         }
     }

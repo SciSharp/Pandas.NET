@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using PandasNet.Iteration;
 using PandasNet.Iteration.Impl;
 using System;
@@ -22,7 +22,7 @@ namespace PandasNet.Impl
             }
             set
             {
-                Values[index] = value;
+                Values[index].SetData(value);
             }
         }
 

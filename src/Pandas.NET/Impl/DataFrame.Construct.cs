@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,7 +50,7 @@ namespace PandasNet.Impl
                 }
                 else
                 {
-                    Values = Values.hstack(nd);
+                    Values = np.hstack<string>(Values, nd);
                 }
             }
             this.CreateRowIndex();
@@ -59,11 +59,9 @@ namespace PandasNet.Impl
 
         protected virtual void AddColumnLabel(string columnName)
         {
-            var cols = Columns.Values.Storage.GetData<string>().AsQueryable().Select(x => x).Concat(new string[] { columnName })
+            var cols = (Columns.Values.Array as string[]).Select(x => x).Concat(new string[] { columnName })
               .ToArray();
-            Columns.Values.Storage.Allocate(Columns.Values.Storage.DType, new Shape(cols.Length));
-            Columns.Values.Storage.SetData(cols);
-            Columns.Values.Storage.ChangeTensorLayout(1);
+            Columns.Values.SetData(cols);
             _rawColumns.Add(columnName);
         }
 
@@ -84,7 +82,7 @@ namespace PandasNet.Impl
             var insertValues = new NDArray(typeof(T), new Shape(_rowSize, 1));
             for (var i = 0; i < _rowSize; i++)
             {
-                insertValues[i, 0] = value;
+                insertValues[i, 0].SetData(value);
             }
             AddColumnValue(insertValues);
         }
@@ -96,7 +94,7 @@ namespace PandasNet.Impl
                 throw new ArgumentException("输入的数组长度不等于dataframe行数");
             }
             var insertValues = value.reshape(new Shape(_rowSize, 1));
-            Values = Values.hstack(insertValues);
+            Values = np.hstack<int>(Values, insertValues);
         }
 
         protected virtual void AddColumnValue(SeriesBase value)
@@ -137,7 +135,7 @@ namespace PandasNet.Impl
             DataIndex index = null;
             if (_rawColumns == null)
             {
-                index = new DataIndex(np.arange(Values.shape[1]));
+                index = new DataIndex(np.arange(Values.shape[0]));
             }
             else
             {

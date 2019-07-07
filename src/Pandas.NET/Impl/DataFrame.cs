@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NumSharp.Core;
+using NumSharp;
 using PandasNet.Iteration;
 using PandasNet.Iteration.Impl;
 
@@ -87,7 +87,7 @@ namespace PandasNet.Impl
         {
             for (var i = 0; i < _rowSize; i++)
             {
-                Values[i, columnIndex] = singleValue;
+                Values[i, columnIndex].SetData(singleValue);
             }
         }
 
@@ -200,7 +200,7 @@ namespace PandasNet.Impl
                     indexs = new List<TIndex>();
                 NDArray nDArray = null;
                 //验证长度
-                var lengthVail = Values.size / Values.Storage.Shape.BiShape.Item2;
+                var lengthVail = Values.size / Values.shape[1];
                 var length = s.End;
                 if (s.End > lengthVail)
                     length = lengthVail;
@@ -221,9 +221,9 @@ namespace PandasNet.Impl
                     if (_rawIndex != null)
                         indexs.Add(_rawIndex[index]);
                     var value = Values[index] as NDArray;
-                    objs.AddRange(value.Storage.GetData<object>());
+                    objs.AddRange(value.Data<object>());
                 }
-                nDArray = np.array(objs.ToArray(), Values.Storage.DType);
+                nDArray = np.array(objs.ToArray(), Values.dtype);
                 int ndim = Columns.Size;
                 nDArray.reshape(objs.Count / ndim, ndim);
                 var result = new DataFrame<TIndex>(nDArray, indexs, _rawColumns, _dtype);
@@ -313,7 +313,7 @@ namespace PandasNet.Impl
                     end = Index.GetPosition(s.EndLabel);
                 }
                 //验证长度
-                var lengthVail = Values.size / Values.Storage.Shape.BiShape.Item2 - 1;
+                var lengthVail = Values.size / Values.shape[1] - 1;
                 var length = end;
                 if (end > lengthVail)
                     length = lengthVail;
@@ -335,9 +335,9 @@ namespace PandasNet.Impl
                     if (_rawIndex != null)
                         indexs.Add(_rawIndex[index]);
                     var value = Values[index] as NDArray;
-                    objs.AddRange(value.Storage.GetData<object>());
+                    objs.AddRange(value.Data<object>());
                 }
-                nDArray = np.array(objs.ToArray(), Values.Storage.DType);
+                nDArray = np.array(objs.ToArray(), Values.dtype);
                 int ndim = Columns.Size;
                 nDArray.reshape(objs.Count / ndim, ndim);
                 var result = new DataFrame<TIndex>(nDArray, indexs, _rawColumns, _dtype);

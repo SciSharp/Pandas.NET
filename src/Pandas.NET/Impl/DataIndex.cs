@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +20,7 @@ namespace PandasNet.Impl
         public DataIndex(params string[] items)
         {
             Values = new NDArray(typeof(string), items.Length);
-            Values.Storage.SetData(items);
+            Values.SetData(items);
         }
 
         public int GetPosition<T>(T key)

@@ -1,4 +1,4 @@
-﻿using NumSharp.Core;
+﻿using NumSharp;
 using PandasNet.Impl;
 using System;
 using System.Collections.Generic;
@@ -85,7 +85,7 @@ namespace PandasNet
             {
                 for (var p = 0; p < columnSize; p++)
                 {
-                    nd[i, p] = props[p].GetValue(data[i]);
+                    nd[i, p].SetData(props[p].GetValue(data[i]));
                 }
             }
             return pd.DataFrame(nd, index, props.Select(x => x.Name).ToArray(), typeof(object));
