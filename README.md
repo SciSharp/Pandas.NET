@@ -1,6 +1,6 @@
 # Pandas.NET
 
-
+[![Join the chat at https://gitter.im/publiclab/publiclab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sci-sharp/community) [![NuGet](https://img.shields.io/nuget/dt/Pandas.NET.svg)](https://www.nuget.org/packages/Pandas.NET)
 
 ## Implemented APIs
 
