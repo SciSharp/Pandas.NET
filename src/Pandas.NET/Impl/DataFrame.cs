@@ -10,8 +10,14 @@ namespace PandasNet.Impl
 {
     public partial class DataFrame<TIndex> : PandasObject, IDataFrame
     {
+        /// <summary>
+        /// The index (row labels) of the DataFrame.
+        /// </summary>
         public IDataIndex Index { get; internal set; }
 
+        /// <summary>
+        /// The column labels of the DataFrame.
+        /// </summary>
         public IDataIndex Columns { get; internal set; }
 
         /// <summary>
@@ -140,7 +146,7 @@ namespace PandasNet.Impl
             get
             {
                 var colLength = columnIndexs.Length;
-                NDArray array = new object[_rowSize, colLength];
+                NDArray array = new NDArray(Values.dtype, new Shape(_rowSize, colLength));
                 for (var rowIndex = 0; rowIndex < _rowSize; rowIndex++)
                 {
                     for (var col = 0; col < colLength; col++)
