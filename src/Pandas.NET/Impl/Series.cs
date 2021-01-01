@@ -1,6 +1,4 @@
 ﻿using NumSharp;
-using PandasNet.Iteration;
-using PandasNet.Iteration.Impl;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,8 +28,7 @@ namespace PandasNet.Impl
         {
             get
             {
-                int pos = -1;
-                pos = Array.IndexOf(Index.Values.Data<string>(), idx);
+                int pos = Array.IndexOf(Index.Values.Data<string>(), idx);
                 return Values[pos];
             }
         }

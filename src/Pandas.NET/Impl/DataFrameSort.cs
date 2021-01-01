@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PandasNet.Impl
 {
     public class DataFrameSort : ISort
     {
-        private IDataFrame _dataFrame;
-        private ISorter _sorter;
+        private readonly IDataFrame _dataFrame;
+        private readonly ISorter _sorter;
         private List<int> _indexs;
         public DataFrameSort(IDataFrame dataFrame, ISorter sorter)
         {

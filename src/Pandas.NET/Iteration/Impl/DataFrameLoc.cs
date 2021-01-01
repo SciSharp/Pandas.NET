@@ -8,7 +8,7 @@ namespace PandasNet.Iteration.Impl
 {
     public class DataFrameLoc : ILoc, IILoc
     {
-        private IDataFrame _dataFrame;
+        private readonly IDataFrame _dataFrame;
 
         public DataFrameLoc(IDataFrame dataFrame)
         {
@@ -17,7 +17,7 @@ namespace PandasNet.Iteration.Impl
         public SeriesBase this[string rowLabel]
         {
             get
-            { 
+            {
                 var rowIndex = _dataFrame.Index.GetPosition(rowLabel);
                 return this[rowIndex];
             }

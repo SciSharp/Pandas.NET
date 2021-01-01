@@ -1,7 +1,6 @@
 ﻿using NumSharp;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PandasNet.Impl
 {
@@ -26,7 +25,7 @@ namespace PandasNet.Impl
         public int GetPosition<T>(T key)
         {
             var data = Values.Data<T>();
-            var pos = Array.IndexOf(Values.Data<T>(), key);
+            var pos = Array.IndexOf(data, key);
             return pos;
         }
 

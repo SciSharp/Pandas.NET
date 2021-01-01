@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PandasNet.Impl
 {
     public class DataFrameGroupBy : IGroupBy
     {
-        private IDataFrame _dataFrame;
-        private IGrouper _grouper;
+        private readonly IDataFrame _dataFrame;
+        private readonly IGrouper _grouper;
         private Dictionary<object, IDataIndex> _groups;
         private Dictionary<object, IDataIndex> _indices;
         private SeriesBase _keySeries;
@@ -70,7 +69,6 @@ namespace PandasNet.Impl
 
                 labels[i] = _keySeries.Index.Values[index];
             }
-
             return new DataFrame<object>(array, labels, _dataFrame.Columns.Values.Data<string>(), typeof(object));
         }
 

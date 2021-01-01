@@ -204,7 +204,6 @@ namespace PandasNet.Impl
                 List<TIndex> indexs = null;
                 if (_rawIndex != null)
                     indexs = new List<TIndex>();
-                NDArray nDArray = null;
                 //验证长度
                 var lengthVail = Values.size / Values.shape[1];
                 var length = s.End;
@@ -226,10 +225,10 @@ namespace PandasNet.Impl
                     int index = GetIndex(i, lengthVail);
                     if (_rawIndex != null)
                         indexs.Add(_rawIndex[index]);
-                    var value = Values[index] as NDArray;
+                    var value = Values[index];
                     objs.AddRange(value.Data<object>());
                 }
-                nDArray = np.array(objs.ToArray(), Values.dtype);
+                NDArray nDArray = np.array(objs.ToArray(), Values.dtype);
                 int ndim = Columns.Size;
                 nDArray.reshape(objs.Count / ndim, ndim);
                 var result = new DataFrame<TIndex>(nDArray, indexs, _rawColumns, _dtype);
@@ -305,11 +304,9 @@ namespace PandasNet.Impl
                 List<TIndex> indexs = null;
                 if (_rawIndex != null)
                     indexs = new List<TIndex>();
-                NDArray nDArray = null;
                 //转换获取的标签行索引
                 int start = 0;
                 int end = int.MaxValue;
-
                 if (!string.IsNullOrEmpty(s.StartLabel))
                 {
                     start = Index.GetPosition(s.StartLabel);
@@ -343,7 +340,7 @@ namespace PandasNet.Impl
                     var value = Values[index] as NDArray;
                     objs.AddRange(value.Data<object>());
                 }
-                nDArray = np.array(objs.ToArray(), Values.dtype);
+                NDArray nDArray = np.array(objs.ToArray(), Values.dtype);
                 int ndim = Columns.Size;
                 nDArray.reshape(objs.Count / ndim, ndim);
                 var result = new DataFrame<TIndex>(nDArray, indexs, _rawColumns, _dtype);

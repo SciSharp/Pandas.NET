@@ -53,8 +53,8 @@ namespace PandasNet.Impl
                     Values = np.hstack<string>(Values, nd);
                 }
             }
-            this.CreateRowIndex();
-            this.CreateColumnIndex();
+            CreateRowIndex();
+            CreateColumnIndex();
         }
 
         protected virtual void AddColumnLabel(string columnName)

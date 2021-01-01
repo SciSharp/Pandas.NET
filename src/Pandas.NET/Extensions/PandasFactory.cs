@@ -31,15 +31,14 @@ namespace PandasNet
 
         public static SeriesBase Series<T>(this Pandas pd, T data)
         {
-            if(data is Array)
+            if (data is Array)
             {
               return pd.Series(data as Array);
             }
-            Series res = null;
             Type type = data.GetType();
             var properties = type.GetProperties();
             var nd = properties.Select(x => x.GetValue(data)).ToArray();
-            res = new Series(nd)
+            Series res = new Series(new NDArray(nd))
             {
                 Index = new DataIndex(properties.Select(x => x.Name).ToArray())
             };

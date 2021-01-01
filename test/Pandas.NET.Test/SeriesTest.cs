@@ -1,3 +1,4 @@
+using NumSharp;
 using PandasNet;
 using System;
 using Xunit;
@@ -6,7 +7,7 @@ namespace PandasNet.Test
 {
     public class SeriesTest
     {
-        private Pandas pd;
+        private readonly Pandas pd;
         public SeriesTest()
         {
             pd = new Pandas();
@@ -15,9 +16,14 @@ namespace PandasNet.Test
         [Fact]
         public void CreateSeries_WithArray_Test()
         {
-            var series = pd.Series(new int[] { 1, 2, 3 });
+            var rawData = new int[] { 1, 2, 3 };
+            var series = pd.Series(rawData);
             Assert.Equal(3, series.Size);
-            Assert.Equal(3, series[2]);
+            for (var i = 0; i < rawData.Length; i++)
+            {
+                var data = series[i] as NDArray;
+                Assert.Equal(rawData[i], data.GetInt32());
+            }
         }
 
         [Fact]

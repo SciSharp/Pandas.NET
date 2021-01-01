@@ -1,6 +1,10 @@
 # Pandas.NET
 
-[![Join the chat at https://gitter.im/publiclab/publiclab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sci-sharp/community) [![NuGet](https://img.shields.io/nuget/dt/Pandas.NET.svg)](https://www.nuget.org/packages/Pandas.NET)
+[![Join the chat at https://gitter.im/publiclab/publiclab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sci-sharp/community)
+[![NuGet](https://img.shields.io/nuget/dt/Pandas.NET.svg)](https://www.nuget.org/packages/Pandas.NET)
+[![Build Status](https://dev.azure.com/scisharp/Pandas.NET/_apis/build/status/Windows%20CI?branchName=master&label=Windows)](https://dev.azure.com/scisharp/Pandas.NET/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/scisharp/Pandas.NET/_apis/build/status/Ubuntu%20CI?branchName=master&label=Ubuntu)](https://dev.azure.com/scisharp/Pandas.NET/_build/latest?definitionId=3&branchName=master)
+[![Build Status](https://dev.azure.com/scisharp/Pandas.NET/_apis/build/status/macOS%20CI?branchName=master&label=MacOS)](https://dev.azure.com/scisharp/Pandas.NET/_build/latest?definitionId=1&branchName=master)
 
 ## Implemented APIs
 
