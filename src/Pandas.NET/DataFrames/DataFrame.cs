@@ -12,7 +12,6 @@ namespace PandasNet
 
         public DataFrame(List<Array> data, Array index = null, List<Column> columns = null, bool copy = false)
         {
-            data.Insert(0, index);
             this.data = data;
             this.index = index;
             this.columns = columns;

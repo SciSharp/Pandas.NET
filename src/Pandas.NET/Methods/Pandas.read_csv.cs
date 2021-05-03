@@ -16,15 +16,17 @@ namespace PandasNet
                 Name = x.Trim('\"')
             }).ToList();
 
+            // add index column
             columns.Insert(0, new Column
             {
-                Name = "index",
+                Name = "Index",
                 DType = typeof(int)
             });
 
             var data = new List<Array>();
+            data.Add(new int[rows.Length]);
 
-            for(int col = 1; col < columns.Count; col++)
+            for (int col = 1; col < columns.Count; col++)
             {
                 columns[col].DType = InferDataType(rows[1]);
                 if(columns[col].DType == typeof(string))
@@ -35,10 +37,11 @@ namespace PandasNet
 
             for (int row = 1; row < rows.Length; row++)
             {
+                data[0].SetValue(row - 1, row - 1);
                 var values = rows[row].Split(',');
-                for (int col = 0; col < columns.Count - 1; col++)
+                for (int col = 1; col < columns.Count; col++)
                 {
-                    data[col].SetValue(values[col], row - 1);
+                    data[col].SetValue(values[col-1], row - 1);
                 }
             }
 

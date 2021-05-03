@@ -32,7 +32,7 @@ namespace PandasNet
                     data1RowIndex++;
                 }
 
-                return new DataFrame(data1, Enumerable.Range(0, rowCount).ToArray(), columns);
+                return new DataFrame(data1, Enumerable.Range(0, data1RowIndex).ToArray(), columns);
             }
         }
     }
