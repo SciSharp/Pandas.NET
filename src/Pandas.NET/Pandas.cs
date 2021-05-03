@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PandasNet
 {
-    public class Pandas
+    public partial class Pandas
     {
+
     }
 }

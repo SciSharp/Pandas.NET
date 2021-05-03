@@ -4,11 +4,8 @@ using System.Text;
 
 namespace PandasNet
 {
-    /// <summary>
-    /// 允许分组
-    /// </summary>
-    public interface IGroupbyable
+    public static class PandasApi
     {
-        
+        public static Pandas pd { get; } = new Pandas();
     }
 }

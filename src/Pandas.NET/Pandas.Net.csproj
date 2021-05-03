@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -15,9 +15,5 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Pandas</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NumSharp" Version="0.10.3" />
-  </ItemGroup>
 
 </Project>
