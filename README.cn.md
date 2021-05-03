@@ -22,13 +22,13 @@
 
 ### 2. Series
 
-* `s.iloc[0]`: Select data by index
+* `s.iloc[0]`:按索引选取数据
 
-* `s.loc["index_label"]`： Select data by index label
+* `s.loc["index_label"]`：按索引标签选取数据
 
 ### 3. DataFrame
 
-#### Structure
+#### 结构
 
 * df.Index
 * df.Columns
@@ -37,16 +37,17 @@
 * df.NDIM
 * df.Size
 
-#### Method
+#### 方法
 
-* `df[0]`： Select data by column index （returns Series）
-* `df[params int[] columnIndexs] `: Select data by column index （returns DataFrame）
-* `df["column_label"]`： Select data by column label （returns Series）; accessible `set` accessor increase column （if the column label does not exist）
-* `df[params string[] columnLabels]`： Select data by column label （returns DataFrame）
-* `df.Column(string columnLabel, NDArray value)`: Set the column and its value; create when the column does not exist
-* `df.Column(int columnIndex, NDArray value)`: Set the column and the value of the column; when the column does not exist, an exception is reported
-* `df[Slice s]`: Row slice selection data
+* `df[0]`：按列索引选取数据（返回Series）
+* `df[params int[] columnIndexs] `:按列索引选取数据（返回DataFrame）
+* `df["column_label"]`：按列标签选取数据（返回Series）;可通过 `set` 访问器增加列（如果列标签不存在）
+* `df[params string[] columnLabels]`：按列标签选取数据（返回DataFrame）
+* `df.Column(string columnLabel, NDArray value)`:设置列以及列的值；当列不存在时创建
+* `df.Column(int columnIndex, NDArray value)`:设置列以及列的值；当列不存在时报异常
+* `df[Slice s]`:行切片选取数据
 
-* `df.loc["index_label"]`： Select data by row index label
-* `df.loc["index_label", "column_label"]`： Select data by row and column labels
-* `df.iloc[0]`： Index by row （row number） select data
+* `df.loc["index_label"]`：按行索引标签选取数据
+* `df.loc["index_label", "column_label"]`：按行和列标签选取数据
+* `df.iloc[0]`：按行索引（row number）选取数据
+
