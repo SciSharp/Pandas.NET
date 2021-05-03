@@ -7,7 +7,7 @@ namespace PandasNet
 {
     public partial class DataFrame
     {
-        public DataFrame this[int start, int step = 1]
+        public DataFrame this[int start, int step]
         {
             get
             {
@@ -33,6 +33,33 @@ namespace PandasNet
                 }
 
                 return new DataFrame(data1, Enumerable.Range(0, data1RowIndex).ToArray(), columns);
+            }
+        }
+
+        public DataFrame this[int stop]
+        {
+            get
+            {
+                var rowCount = stop;
+
+                var data1 = new List<Array>();
+                for (int col = 0; col < columns.Count; col++)
+                {
+                    if (columns[col].DType == typeof(int))
+                        data1.Add(new int[rowCount]);
+                    else if (columns[col].DType == typeof(string))
+                        data1.Add(new string[rowCount]);
+                }
+
+                for (int row = 0; row < rowCount; row++)
+                {
+                    for (int col = 0; col < columns.Count; col++)
+                    {
+                        data1[col].SetValue(data[col].GetValue(row), row);
+                    }
+                }
+
+                return new DataFrame(data1, Enumerable.Range(0, rowCount).ToArray(), columns);
             }
         }
     }

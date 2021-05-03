@@ -19,7 +19,7 @@ namespace PandasNet
             // add index column
             columns.Insert(0, new Column
             {
-                Name = "Index",
+                Name = string.Empty,
                 DType = typeof(int)
             });
 
