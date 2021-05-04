@@ -9,17 +9,18 @@ namespace PandasNet
     {
         public override string ToString()
         {
-            var display = string.Empty;
-            var header = string.Join(" ", columns.Select(x => x.Name));
+            var display = "  ";
+            var header = string.Join(" ", _columns.Select(x => x.Name));
             display += header;
 
-            for (int i = 0; i < index.Length; i++)
+            for (int i = 0; i < _index.size; i++)
             {
                 if (i > 4) break;
                 var values = new List<string>();
-                for(int col = 0; col < columns.Count; col++)
+                values.Add(_index.GetValue(i).ToString());
+                for(int col = 0; col < _columns.Count; col++)
                 {
-                    values.Add(data[col].GetValue(i).ToString());
+                    values.Add(_data[col].GetValue(i).ToString());
                 }
                 display += "\r\n" + string.Join(" ", values);
             }

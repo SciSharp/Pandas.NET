@@ -15,46 +15,41 @@ namespace PandasNet
             {
                 Name = x.Trim('\"')
             }).ToList();
+            var index = new Series(Enumerable.Range(0, rows.Length).ToArray());
 
-            // add index column
-            columns.Insert(0, new Column
+            // add columns
+            var data = new List<Series>();
+            for (int col = 0; col < columns.Count; col++)
             {
-                Name = string.Empty,
-                DType = typeof(int)
-            });
-
-            var data = new List<Array>();
-            data.Add(new int[rows.Length]);
-
-            for (int col = 1; col < columns.Count; col++)
-            {
-                columns[col].DType = InferDataType(rows[1]);
-                if(columns[col].DType == typeof(string))
-                {
-                    data.Add(new string[rows.Length]);
-                }
+                columns[col].DType = InferDataType(rows[1], col);
+                var series = new Series(columns[col]);
+                series.Allocate(rows.Length);
+                series.SetIndex(index);
+                data.Add(series);
             }
 
+            // set values
             for (int row = 1; row < rows.Length; row++)
             {
-                data[0].SetValue(row - 1, row - 1);
                 var values = rows[row].Split(',');
-                for (int col = 1; col < columns.Count; col++)
-                {
-                    data[col].SetValue(values[col-1], row - 1);
-                }
+                for (int col = 0; col < columns.Count; col++)
+                    data[col].SetValue(values[col], row - 1);
             }
 
-            return new DataFrame(data, Enumerable.Range(0, rows.Length - 1).ToArray(), columns);
+            return new DataFrame(data, index: index, columns: columns);
         }
 
-        Type InferDataType(string row)
+        Type InferDataType(string row, int col)
         {
-            var val = row.Split(',')[0];
-            if (int.TryParse(val, out var intValue))
+            var val = row.Split(',')[col];
+            if (int.TryParse(val, out var int32))
                 return typeof(int);
-            if (float.TryParse(val, out var floatValue))
+            else if (double.TryParse(val, out var float32))
                 return typeof(float);
+            else if (double.TryParse(val, out var float64))
+                return typeof(double);
+            else if (DateTime.TryParse(val, out var datetime))
+                return typeof(DateTime);
             return typeof(string);
         }
     }

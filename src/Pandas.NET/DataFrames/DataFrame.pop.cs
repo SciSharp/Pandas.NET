@@ -9,12 +9,12 @@ namespace PandasNet
     {
         public void pop(string columnName)
         {
-            for(int i = 0; i< columns.Count; i++)
+            for(int i = 0; i< _columns.Count; i++)
             {
-                if(columns[i].Name == columnName)
+                if(_columns[i].Name == columnName)
                 {
-                    columns.RemoveAt(i);
-                    data.RemoveAt(i);
+                    _columns.RemoveAt(i);
+                    _data.RemoveAt(i);
                 }
             }
         }

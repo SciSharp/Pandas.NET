@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>PandasNet</RootNamespace>
     <Version>0.1.0</Version>
+    <LangVersion>8.0</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Haiping Chen</Authors>
     <Company>SciSharp STACK</Company>
@@ -14,6 +15,7 @@
     <RepositoryUrl>https://github.com/SciSharp/Pandas.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Pandas</PackageTags>
+    <UserSecretsId>a0de1a80-b5db-4270-a191-01beeef4427b</UserSecretsId>
   </PropertyGroup>
 
 </Project>

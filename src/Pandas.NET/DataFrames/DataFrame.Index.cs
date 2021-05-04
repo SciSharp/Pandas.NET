@@ -11,28 +11,7 @@ namespace PandasNet
         {
             get
             {
-                var rowCount = (index.Length - start) / step;
-
-                var data1 = new List<Array>();
-                for (int col = 0; col < columns.Count; col++)
-                {
-                    if (columns[col].DType == typeof(int))
-                        data1.Add(new int[rowCount]);
-                    else if (columns[col].DType == typeof(string))
-                        data1.Add(new string[rowCount]);
-                }
-
-                var data1RowIndex = 0;
-                for (int row = start; row < index.Length; row += step)
-                {
-                    for (int col = 0; col < columns.Count; col++)
-                    {
-                        data1[col].SetValue(data[col].GetValue(row), data1RowIndex);
-                    }
-                    data1RowIndex++;
-                }
-
-                return new DataFrame(data1, Enumerable.Range(0, data1RowIndex).ToArray(), columns);
+                return Slice(start, step: step);
             }
         }
 
@@ -40,27 +19,58 @@ namespace PandasNet
         {
             get
             {
-                var rowCount = stop;
-
-                var data1 = new List<Array>();
-                for (int col = 0; col < columns.Count; col++)
-                {
-                    if (columns[col].DType == typeof(int))
-                        data1.Add(new int[rowCount]);
-                    else if (columns[col].DType == typeof(string))
-                        data1.Add(new string[rowCount]);
-                }
-
-                for (int row = 0; row < rowCount; row++)
-                {
-                    for (int col = 0; col < columns.Count; col++)
-                    {
-                        data1[col].SetValue(data[col].GetValue(row), row);
-                    }
-                }
-
-                return new DataFrame(data1, Enumerable.Range(0, rowCount).ToArray(), columns);
+                return Slice(0, stop: stop);
             }
+        }
+
+        public Series this[int row, string columName]
+        {
+            get
+            {
+                return _data.FirstOrDefault(x => x.name == columName);
+            }
+
+            set
+            {
+                throw new NotImplementedException("");
+            }
+        }
+
+        DataFrame Slice(int start, int stop = -1, int step = 1)
+        {
+            if (stop < 0)
+                stop = _index.size;
+
+            var rowCount = (stop - start) / step;
+
+            var data1 = new List<Series>();
+            for (int col = 0; col < _columns.Count; col++)
+            {
+                var series = new Series(_columns[col]);
+                series.Allocate(rowCount);
+                data1.Add(series);
+            }
+
+            var data1RowIndex = 0;
+            var newIndex = new int[rowCount];
+            for (int row = start; row < stop; row += step)
+            {
+                if (data1RowIndex >= rowCount)
+                    break;
+
+                for (int col = 0; col < _columns.Count; col++)
+                {
+                    data1[col].SetValue(_data[col].GetValue(row), data1RowIndex);
+                }
+                newIndex[data1RowIndex] = _index.GetValue<int>(row);
+                data1RowIndex++;
+            }
+
+            var index = new Series(newIndex);
+            foreach (var d in data1)
+                d.SetIndex(index);
+
+            return new DataFrame(data1, index, _columns);
         }
     }
 }
