@@ -5,7 +5,7 @@ namespace PandasNet
 {
     public partial class Series
     {
-        public double count() 
+        public int count() 
             => _data.Length;
 
         public double mean()
@@ -13,8 +13,8 @@ namespace PandasNet
 
         public double sum() => _data switch
         {
-            int[] data => data.Sum(x => (double)x),
-            float[] data => data.Sum(x => (double)x),
+            int[] data => data.Sum(x => (float)x),
+            float[] data => data.Sum(x => (float)x),
             double[] data => data.Sum(),
             _ => throw new NotImplementedException("")
         };
@@ -47,6 +47,32 @@ namespace PandasNet
             };
 
             return Math.Sqrt(sum / count());
+        }
+
+        public Series cos()
+        {
+            var cos = _data switch
+            {
+                int[] data => data.Select(x => Math.Cos(x)),
+                float[] data => data.Select(x => Math.Cos(x)),
+                double[] data => data.Select(x => Math.Cos(x)),
+                _ => throw new NotImplementedException("")
+            };
+
+            return new Series(cos.ToArray());
+        }
+
+        public Series sin()
+        {
+            var cos = _data switch
+            {
+                int[] data => data.Select(x => Math.Sin(x)),
+                float[] data => data.Select(x => Math.Sin(x)),
+                double[] data => data.Select(x => Math.Sin(x)),
+                _ => throw new NotImplementedException("")
+            };
+
+            return new Series(cos.ToArray());
         }
     }
 }

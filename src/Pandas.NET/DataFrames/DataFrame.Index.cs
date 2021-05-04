@@ -36,6 +36,24 @@ namespace PandasNet
             }
         }
 
+        public Series this[string columName]
+        {
+            get
+            {
+                return _data.FirstOrDefault(x => x.name == columName);
+            }
+
+            set
+            {
+                _data.Add(value);
+                _columns.Add(new Column
+                {
+                    Name = columName,
+                    DType = value.dtype
+                });
+            }
+        }
+
         DataFrame Slice(int start, int stop = -1, int step = 1)
         {
             if (stop < 0)
@@ -52,7 +70,12 @@ namespace PandasNet
             }
 
             var data1RowIndex = 0;
-            var newIndex = new int[rowCount];
+            var index = new Series(new Column
+            {
+                Name = _index.name,
+                DType = _index.dtype
+            });
+            index.Allocate(rowCount);
             for (int row = start; row < stop; row += step)
             {
                 if (data1RowIndex >= rowCount)
@@ -62,11 +85,10 @@ namespace PandasNet
                 {
                     data1[col].SetValue(_data[col].GetValue(row), data1RowIndex);
                 }
-                newIndex[data1RowIndex] = _index.GetValue<int>(row);
+                index.SetValue(_index.GetValue(row), data1RowIndex);
                 data1RowIndex++;
             }
-
-            var index = new Series(newIndex);
+            
             foreach (var d in data1)
                 d.SetIndex(index);
 

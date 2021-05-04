@@ -7,7 +7,9 @@ namespace PandasNet
     public partial class Series
     {
         Array _data;
+        public Array data => _data;
         Series _index;
+        public Series index => _index;
         Column _column;
         public Column column => _column;
 
@@ -20,6 +22,7 @@ namespace PandasNet
             _data = data;
             _column = data switch
             {
+                bool[] bool1 => new Column { Name = string.Empty, DType = typeof(bool) },
                 int[] int32 => new Column { Name = string.Empty, DType = typeof(int) },
                 double[] float64 => new Column { Name = string.Empty, DType = typeof(double) },
                 string[] strings => new Column { Name = string.Empty, DType = typeof(string) },
@@ -55,6 +58,8 @@ namespace PandasNet
                 _data = new double[count];
             else if (_column.DType == typeof(DateTime))
                 _data = new DateTime[count];
+            else if (_column.DType == typeof(string))
+                _data = new string[count];
             else
                 throw new NotImplementedException("");
         }

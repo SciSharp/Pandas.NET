@@ -7,16 +7,21 @@ namespace PandasNet
 {
     public partial class DataFrame
     {
-        public void pop(string columnName)
+        public Series pop(string columnName)
         {
-            for(int i = 0; i< _columns.Count; i++)
+            Series series = null;
+
+            for (int i = 0; i< _columns.Count; i++)
             {
                 if(_columns[i].Name == columnName)
                 {
+                    series = _data[i];
                     _columns.RemoveAt(i);
                     _data.RemoveAt(i);
                 }
             }
+
+            return series;
         }
     }
 }
