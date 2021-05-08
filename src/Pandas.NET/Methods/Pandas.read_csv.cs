@@ -44,10 +44,10 @@ namespace PandasNet
             var val = row.Split(',')[col];
             if (int.TryParse(val, out var int32))
                 return typeof(int);
+            else if (float.TryParse(val, out var float32))
+                return typeof(float);
             else if (double.TryParse(val, out var float64))
                 return typeof(double);
-            else if (DateTime.TryParse(val, out var datetime))
-                return typeof(DateTime);
             return typeof(string);
         }
     }

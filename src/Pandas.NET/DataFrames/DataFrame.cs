@@ -7,8 +7,18 @@ namespace PandasNet
     public partial class DataFrame
     {
         private List<Series> _data;
+        public List<Series> data => _data;
+
         private Series _index;
+        public Series index => _index;
+
         private List<Column> _columns;
+        public List<Column> columns => _columns;
+
+        public int ndim => _shape.Length;
+
+        private int[] _shape;
+        public int[] shape => _shape;
 
         public DataFrame(List<Series> data, Series index = null, List<Column> columns = null, bool copy = false)
         {
@@ -25,6 +35,12 @@ namespace PandasNet
             _data = data;
             _index = index;
             _columns = columns;
+
+            _shape = new int[]
+            {
+                index.size,
+                columns.Count
+            };
         }
     }
 }

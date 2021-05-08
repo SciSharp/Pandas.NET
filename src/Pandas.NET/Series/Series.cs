@@ -24,7 +24,9 @@ namespace PandasNet
             {
                 bool[] bool1 => new Column { Name = string.Empty, DType = typeof(bool) },
                 int[] int32 => new Column { Name = string.Empty, DType = typeof(int) },
+                float[] float32 => new Column { Name = string.Empty, DType = typeof(float) },
                 double[] float64 => new Column { Name = string.Empty, DType = typeof(double) },
+                DateTime[] strings => new Column { Name = string.Empty, DType = typeof(DateTime) },
                 string[] strings => new Column { Name = string.Empty, DType = typeof(string) },
                 _ => throw new NotImplementedException("")
             };

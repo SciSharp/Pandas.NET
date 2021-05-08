@@ -20,7 +20,11 @@ namespace PandasNet
                 values.Add(_index.GetValue(i).ToString());
                 for(int col = 0; col < _columns.Count; col++)
                 {
-                    values.Add(_data[col].GetValue(i).ToString());
+                    var value = _data[col].GetValue(i);
+                    if (value is double float64)
+                        values.Add(Convert.ToSingle(float64).ToString());
+                    else
+                        values.Add(value.ToString());
                 }
                 display += "\r\n" + string.Join(" ", values);
             }

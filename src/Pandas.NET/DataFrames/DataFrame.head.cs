@@ -9,7 +9,7 @@ namespace PandasNet
     {
         public DataFrame head()
         {
-            return this[5];
+            return this[0, 5, 1];
         }
     }
 }

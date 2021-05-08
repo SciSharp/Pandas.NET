@@ -8,34 +8,31 @@ namespace PandasNet
         public int count() 
             => _data.Length;
 
-        public double mean()
+        public float mean()
             => sum() / count();
 
-        public double sum() => _data switch
+        public float sum() => _data switch
         {
             int[] data => data.Sum(x => (float)x),
-            float[] data => data.Sum(x => (float)x),
-            double[] data => data.Sum(),
+            float[] data => data.Sum(),
             _ => throw new NotImplementedException("")
         };
 
-        public double min() => _data switch
+        public float min() => _data switch
         {
             int[] data => data.Min(),
             float[] data => data.Min(),
-            double[] data => data.Min(),
             _ => throw new NotImplementedException("")
         };
 
-        public double max() => _data switch
+        public float max() => _data switch
         {
             int[] data => data.Max(),
             float[] data => data.Max(),
-            double[] data => data.Max(),
             _ => throw new NotImplementedException("")
         };
 
-        public double std()
+        public float std()
         {
             var avg = mean();
             var sum = _data switch
@@ -46,16 +43,16 @@ namespace PandasNet
                 _ => throw new NotImplementedException("")
             };
 
-            return Math.Sqrt(sum / count());
+            return (float)Math.Sqrt(sum / count());
         }
 
         public Series cos()
         {
             var cos = _data switch
             {
-                int[] data => data.Select(x => Math.Cos(x)),
-                float[] data => data.Select(x => Math.Cos(x)),
-                double[] data => data.Select(x => Math.Cos(x)),
+                int[] data => data.Select(x => (float)Math.Cos(x)),
+                float[] data => data.Select(x => (float)Math.Cos(x)),
+                double[] data => data.Select(x => (float)Math.Cos(x)),
                 _ => throw new NotImplementedException("")
             };
 
@@ -64,15 +61,15 @@ namespace PandasNet
 
         public Series sin()
         {
-            var cos = _data switch
+            var sin = _data switch
             {
-                int[] data => data.Select(x => Math.Sin(x)),
-                float[] data => data.Select(x => Math.Sin(x)),
-                double[] data => data.Select(x => Math.Sin(x)),
+                int[] data => data.Select(x => (float)Math.Sin(x)),
+                float[] data => data.Select(x => (float)Math.Sin(x)),
+                double[] data => data.Select(x => (float)Math.Sin(x)),
                 _ => throw new NotImplementedException("")
             };
 
-            return new Series(cos.ToArray());
+            return new Series(sin.ToArray());
         }
     }
 }

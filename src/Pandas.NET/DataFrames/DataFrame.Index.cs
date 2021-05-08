@@ -7,20 +7,19 @@ namespace PandasNet
 {
     public partial class DataFrame
     {
-        public DataFrame this[int start, int step]
-        {
-            get
-            {
-                return Slice(start, step: step);
-            }
-        }
-
         public DataFrame this[int stop]
         {
-            get
-            {
-                return Slice(0, stop: stop);
-            }
+            get => Slice(0, stop, step: 1);
+        }
+
+        public DataFrame this[int start, int step]
+        {
+            get => Slice(start, step: step);
+        }
+
+        public DataFrame this[int start, int stop, int step]
+        {
+            get => Slice(start, stop: stop, step: step);
         }
 
         public Series this[int row, string columName]
