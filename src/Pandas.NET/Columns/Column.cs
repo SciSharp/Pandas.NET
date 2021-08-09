@@ -6,6 +6,7 @@ namespace PandasNet
 {
     public class Column
     {
+        public int Index { get; set; }
         public string Name { get; set; }
         public Type DType { get; set; }
 

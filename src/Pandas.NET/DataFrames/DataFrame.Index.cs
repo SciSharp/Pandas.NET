@@ -2,24 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tensorflow;
 
 namespace PandasNet
 {
     public partial class DataFrame
     {
-        public DataFrame this[int stop]
+        public DataFrame this[Slice slice]
         {
-            get => Slice(0, stop, step: 1);
-        }
-
-        public DataFrame this[int start, int step]
-        {
-            get => Slice(start, step: step);
-        }
-
-        public DataFrame this[int start, int stop, int step]
-        {
-            get => Slice(start, stop: stop, step: step);
+            get => Slice(slice);
         }
 
         public Series this[int row, string columName]
@@ -53,11 +44,11 @@ namespace PandasNet
             }
         }
 
-        DataFrame Slice(int start, int stop = -1, int step = 1)
+        DataFrame Slice(Slice slice)
         {
-            if (stop < 0)
-                stop = _index.size;
-
+            var start = slice.Start ?? 0;
+            var stop = slice.Stop ?? _index.size;
+            var step = slice.Step;
             var rowCount = (stop - start) / step;
 
             var data1 = new List<Series>();

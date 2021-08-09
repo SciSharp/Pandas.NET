@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Tensorflow;
 
 namespace PandasNet
 {
@@ -9,7 +10,7 @@ namespace PandasNet
     {
         public DataFrame head()
         {
-            return this[0, 5, 1];
+            return this[new Slice(0, 5, 1)];
         }
     }
 }
