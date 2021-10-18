@@ -6,6 +6,6 @@ namespace PandasNet
 {
     public partial class Pandas
     {
-
+        public DataFrameApi DataFrame = new DataFrameApi();
     }
 }

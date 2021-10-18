@@ -44,6 +44,11 @@ namespace PandasNet
             }
         }
 
+        public DataFrame this[string[] columNames]
+        {
+            get => new DataFrame(_data.Where(x => columNames.Contains(x.name)).ToList());
+        }
+
         DataFrame Slice(Slice slice)
         {
             var start = slice.Start ?? 0;

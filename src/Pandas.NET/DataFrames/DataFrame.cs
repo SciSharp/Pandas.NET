@@ -10,7 +10,11 @@ namespace PandasNet
         public List<Series> data => _data;
 
         private Series _index;
-        public Series index => _index;
+        public Series index 
+        { 
+            get => _index;
+            set => _index = value;
+        }
 
         private List<Column> _columns;
         public List<Column> columns => _columns;
