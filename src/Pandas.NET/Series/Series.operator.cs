@@ -57,6 +57,8 @@ namespace PandasNet
                 return new Series(float32.Select(x => x - b).ToArray());
             else if (a.data is double[] float64)
                 return new Series(float64.Select(x => x - b).ToArray());
+            else if (a.data is int[] int32)
+                return new Series(int32.Select(x => x - b).ToArray());
             throw new NotImplementedException("");
         }
 
