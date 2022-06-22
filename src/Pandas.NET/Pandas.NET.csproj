@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="TensorFlow.NET" Version="0.70.1" />
   </ItemGroup>
 
   <ItemGroup>
