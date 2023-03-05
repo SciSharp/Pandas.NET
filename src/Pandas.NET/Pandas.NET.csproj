@@ -26,7 +26,11 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="TensorFlow.NET" Version="0.100.1" />
+    <PackageReference Include="TensorFlow.NET" Version="0.100.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TensorFlow.NET\src\TensorFlowNET.Core\Tensorflow.Binding.csproj" />
   </ItemGroup>
 
 </Project>
