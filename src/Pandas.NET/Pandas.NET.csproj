@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <RootNamespace>PandasNet</RootNamespace>
     <Version>0.4.0</Version>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Haiping Chen</Authors>
     <Company>SciSharp STACK</Company>
@@ -26,11 +26,11 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="TensorFlow.NET" Version="0.100.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\TensorFlow.NET\src\TensorFlowNET.Core\Tensorflow.Binding.csproj" />
+    <ProjectReference Include="..\..\..\TensorFlow.NET\src\TensorFlowNET.Keras\Tensorflow.Keras.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Linq;
 
-namespace PandasNet
+namespace PandasNet;
+
+public partial class Series
 {
-    public partial class Series
+    public Series map<Tin, Tout>(Func<Tin, Tout> func)
     {
-        public Series map<Tin, Tout>(Func<Tin, Tout> func)
+        var data = new Tout[size];
+        for (int i = 0; i < size; i++)
         {
-            var data = new Tout[size];
-            for (int i = 0; i < size; i++)
-            {
-                data[i] = func((Tin)_data.GetValue(i));
-            }
-            return new Series(data);
+            data[i] = func((Tin)_data.GetValue(i));
         }
+        return new Series(data, column);
     }
 }

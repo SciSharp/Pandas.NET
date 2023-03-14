@@ -16,6 +16,7 @@ namespace PandasNet
         public string name => _column.Name;
         public int size => _data.Length;
         public Type dtype => _column.DType;
+        private List<int> naIndex = new List<int>();
 
         public Series(Array data)
         {
@@ -79,6 +80,16 @@ namespace PandasNet
         public T GetValue<T>(int row)
         {
             return (T)_data.GetValue(row);
+        }
+
+        public void SetNull(int row)
+        {
+            naIndex.Add(row);
+        }
+
+        public bool IsNull(int row)
+        {
+            return naIndex.Contains(row);
         }
 
         public void SetValue<T>(T value, int row)

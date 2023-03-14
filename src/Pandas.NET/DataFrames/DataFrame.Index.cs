@@ -35,6 +35,9 @@ namespace PandasNet
 
             set
             {
+                _data.Remove(_data.FirstOrDefault(x => x.name == columName));
+                _columns.Remove(_columns.FirstOrDefault(x => x.Name == columName));
+
                 _data.Add(value);
                 _columns.Add(new Column
                 {
@@ -44,7 +47,7 @@ namespace PandasNet
             }
         }
 
-        public DataFrame this[string[] columNames]
+        public DataFrame this[params string[] columNames]
         {
             get => new DataFrame(_data.Where(x => columNames.Contains(x.name)).ToList());
         }
