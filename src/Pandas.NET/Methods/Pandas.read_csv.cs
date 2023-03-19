@@ -85,7 +85,9 @@ public partial class Pandas
 
     Type InferDataType(string row, int col, char sep)
     {
-        var val = row.Split(sep)[col];
+        var val = row.Split(sep)
+            .Where(x => !string.IsNullOrEmpty(x))
+            .ToArray()[col];
         if (int.TryParse(val, out var _))
             return typeof(int);
         else if (float.TryParse(val, out var _))

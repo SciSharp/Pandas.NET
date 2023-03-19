@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PandasNet;
@@ -19,15 +20,20 @@ public partial class Pandas
             data.data.Remove(series);
 
             // expand columns
+            var newCols = new List<Column>();
+            var newData = new List<Series>();
             var values = series.array<string>();
             foreach (var col in values.Distinct())
             {
                 var array = values.Select(x => x == col ? 1 : 0).ToArray();
                 var newColumn = new Column { Name = col, DType = typeof(int) };
-                var newSeries = new Series(array, data.index, column);
-                data.columns.Add(newColumn);
-                data.data.Add(newSeries);
+                var newSeries = new Series(array, data.index, newColumn);
+                newCols.Insert(0, newColumn);
+                newData.Insert(0, newSeries);
             }
+
+            data.columns.AddRange(newCols);
+            data.data.AddRange(newData);
         }
         return data;
     }
