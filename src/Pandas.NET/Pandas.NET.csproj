@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <RootNamespace>PandasNet</RootNamespace>
-    <Version>0.5.1</Version>
+    <Version>0.6.0</Version>
     <LangVersion>10.0</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Haiping Chen</Authors>
@@ -15,9 +15,6 @@
     <RepositoryUrl>https://github.com/SciSharp/Pandas.NET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Pandas</PackageTags>
-    <UserSecretsId>a0de1a80-b5db-4270-a191-01beeef4427b</UserSecretsId>
-    <AssemblyVersion>0.5.1.0</AssemblyVersion>
-    <FileVersion>0.5.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,8 +22,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="TensorFlow.NET" Version="0.110.2" />
+    <PackageReference Include="TensorFlow.NET" Version="0.150.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(SolutionName)==ModelsDebug Or $(SolutionName)==Debugging">
+    <ProjectReference Include="..\..\..\TensorFlow.NET\src\TensorFlowNET.Core\Tensorflow.Binding.csproj" />
   </ItemGroup>
 
 </Project>
