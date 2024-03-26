@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pandas.NET.Test", "test\Pan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pandas.NET", "src\Pandas.NET\Pandas.NET.csproj", "{41658850-1B21-4409-BC35-D0E8A7B73661}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pandas.Console", "test\Pandas.Console\Pandas.Console.csproj", "{16298C82-7219-4F52-ACD1-E0AFE650F207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pandas.Console", "test\PandasConsole\PandasConsole.csproj", "{16298C82-7219-4F52-ACD1-E0AFE650F207}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,7 +15,7 @@ namespace PandasNet
             var json = (JObject)JsonConvert.DeserializeObject(data);
 
             var cols = new List<Series>();
-            foreach(var col in json)
+            foreach (var col in json)
             {
                 var column = new Column
                 {
@@ -26,12 +26,14 @@ namespace PandasNet
                 if (type == JTokenType.Integer)
                 {
                     var array = GetArray<int>(col.Value);
+                    column.DType = typeof(int);
                     var series = new Series(array, column);
                     cols.Add(series);
                 }
                 else if (type == JTokenType.String)
                 {
                     var array = GetArray<string>(col.Value);
+                    column.DType = typeof(string);
                     var series = new Series(array, column);
                     cols.Add(series);
                 };
