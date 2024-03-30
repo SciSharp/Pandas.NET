@@ -11,18 +11,22 @@ namespace PandasNet
         {
             var stat_index = new Series(new string[]
             {
-                "count", "mean", "std", "min", "max"
+                "count", "mean", "std", "min", "25%", "50%", "75%", "max"
             });
 
-            var data = _data.Select(x =>
+            var data = _data.Where(s => new Type[] { typeof(int[]), typeof(float[]), typeof(double[]) }.Contains(s.data.GetType()))
+            .Select(x =>
             {
                 var series = new Series(new double[]
                 {
-                    x.count(),
-                    x.mean(),
-                    x.std(),
-                    x.min(),
-                    x.max()
+                        x.count(),
+                        x.mean(),
+                        x.std(),
+                        x.min(),
+                        x.q1(),
+                        x.q2(),
+                        x.q3(),
+                        x.max()
                 }, new Column
                 {
                     DType = typeof(double),

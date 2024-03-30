@@ -10,7 +10,7 @@ public partial class PandasTest
     /// Test arange method for int
     /// </summary>
     [Fact]
-    public void test_arange_int()
+    public void TestArangeInt()
     {
         //create an array of 10 elements from 0 to 9
         var arange = pd.arange<int>(0, 10, 1);
@@ -25,7 +25,7 @@ public partial class PandasTest
     /// Test arange method for float
     /// </summary>
     [Fact]
-    public void test_arange_float()
+    public void TestArangeFloat()
     {
         // Only int is supported
         Assert.Throws<NotImplementedException>(() => pd.arange<float>(0, 10, 1));

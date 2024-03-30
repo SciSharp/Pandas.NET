@@ -10,14 +10,27 @@ public static class Utils
 {
     public static void PrintDataFrameInfo(DataFrame df)
     {
+        var numericTypes = new Type[] { typeof(int[]), typeof(float[]), typeof(double[]) };
         int indexLength = df.shape[0];
-        float minIndex = df.index.min();
-        float maxIndex = df.index.max();
+        double minIndex = 0;
+        double maxIndex = 0;
+        if (numericTypes.Contains(df.index.GetType()))
+        {
+            minIndex = df.index.min();
+            maxIndex = df.index.max();
+        }
         int columnCount = df.columns.Count;
 
         StringBuilder sb = new();
         sb.AppendLine("**Dataframe Info**");
-        sb.AppendLine($"Range Index: {indexLength} entries, {minIndex} to {maxIndex}");
+        if (numericTypes.Contains(df.index.GetType()))
+        {
+            sb.AppendLine($"Range Index: {indexLength} entries, {minIndex} to {maxIndex}");
+        }
+        else
+        {
+            sb.AppendLine($"Index: {indexLength} entries");
+        }
         sb.AppendLine($"Data Columns: (total {columnCount} columns)");
         Console.WriteLine(sb.ToString());
 
@@ -33,6 +46,29 @@ public static class Utils
             table.Rows.Add(i, df.columns[i].Name, df[df.columns[i].Name].count(), df[df.columns[i].Name].dtype ?? typeof(String));
         }
         Console.Write(RenderDataTable(table));
+    }
+
+    public static DataTable DataFrameToTable(DataFrame df)
+    {
+        DataTable table = new DataTable();
+        table.Columns.Add("#");
+
+        foreach (var column in df.columns)
+        {
+            table.Columns.Add(column.Name, column.DType);
+        }
+
+        for (var index = 0; index < df.shape[0]; index++)
+        {
+            DataRow row = table.NewRow();
+            row[0] = df.index.GetValue(index);
+            for (int i = 0; i < df.columns.Count; i++)
+            {
+                row[i + 1] = df[df.columns[i].Name].GetValue(index);
+            }
+            table.Rows.Add(row);
+        }
+        return table;
     }
 
     /// <summary>

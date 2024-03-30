@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using CommandLine;
 using PandasConsole.Methods;
@@ -15,6 +16,9 @@ namespace PandasConsole
         {
             [Option("info", Required = false, HelpText = "Print the info a DataFrame")]
             public bool ConvertSample { get; set; }
+
+            [Option("describe", Required = false, HelpText = "Print the describe a DataFrame")]
+            public bool DescribeSample { get; set; }
         }
 
 
@@ -26,6 +30,10 @@ namespace PandasConsole
                     if (o.ConvertSample)
                     {
                         CommandRunners.RunInfoSample();
+                    }
+                    if (o.DescribeSample)
+                    {
+                        CommandRunners.RunDescribeSample();
                     }
                 })
                 .WithNotParsed(CommandRunners.HandleParseError);
@@ -45,6 +53,14 @@ namespace PandasConsole
                 var converter = new PandasConsoleConvert();
                 var df = converter.GetSampleDataFrame();
                 Utils.PrintDataFrameInfo(df);
+            }
+
+            public static void RunDescribeSample()
+            {
+                var describe = new PandasConsoleDescribe();
+                var df = describe.DescribeDataFrame();
+
+                Console.Write(Utils.RenderDataTable(Utils.DataFrameToTable(df)));
             }
         }
     }
