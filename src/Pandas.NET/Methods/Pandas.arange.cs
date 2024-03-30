@@ -5,7 +5,7 @@ namespace PandasNet
 {
     public partial class Pandas
     {
-        public T[] arange<T>(int start, int stop, int step = 1)
+        public T[] arange<T>(int start = 0, int stop = 0, int step = 1)
         {
             return typeof(T).Name switch
             {
