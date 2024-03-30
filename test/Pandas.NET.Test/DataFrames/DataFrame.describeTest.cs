@@ -10,7 +10,7 @@ namespace Pandas.Test
     public class DataFrameDescribeTest
     {
         [Fact]
-        public void TestDescribe()
+        public void TestDescribe1()
         {
             var df = pd.DataFrame.from_dict(JsonSerializer.Serialize(new Dictionary<string, int[]>
             {
@@ -23,15 +23,44 @@ namespace Pandas.Test
             var result = df.describe();
 
             // Assert
-            Assert.Equal(3, result.columns.Count); // Expecting 5 statistical columns
-            Assert.Equal(3, result.data.Count); // Expecting 5 statistical rows
+            Assert.Equal(3, result.columns.Count); // Expecting 3 statistical columns
+            Assert.Equal(8, result.shape[0]); // Expecting 8 statistical rows
 
-            // Assert specific values for count, mean, std, min, max
-            Assert.Equal(3, result.data[0].GetValue<double>(0));
-            Assert.Equal(2, result.data[0].GetValue<double>(1));
-            Assert.Equal(0.81649661064147949, result.data[0].GetValue<double>(2));
-            Assert.Equal(1, result.data[0].GetValue<double>(3));
-            Assert.Equal(3, result.data[0].GetValue<double>(4));
+            // Assert specific values for "count", "mean", "std", "min", "25%", "50%", "75%", "max"
+            Assert.Equal(3, result.data[0].GetValue<double>(0)); // count
+            Assert.Equal(2, result.data[0].GetValue<double>(1)); // mean
+            Assert.Equal(1, result.data[0].GetValue<double>(2)); // std
+            Assert.Equal(1, result.data[0].GetValue<double>(3)); // min
+            Assert.Equal(1.5, result.data[0].GetValue<double>(4)); // 25%
+            Assert.Equal(2, result.data[0].GetValue<double>(5)); // 50%
+            Assert.Equal(2.5, result.data[0].GetValue<double>(6)); // 75%
+            Assert.Equal(3, result.data[0].GetValue<double>(7)); // max
+        }
+
+        [Fact]
+        public void TestDescribe2()
+        {
+            var df = pd.DataFrame.from_dict(JsonSerializer.Serialize(new Dictionary<string, int[]>
+            {
+                {"col_1",new int[] { 1, 2, 3, 4, 5 }}
+            }));
+
+            // Act
+            var result = df.describe();
+
+            // Assert
+            Assert.Single(result.columns); // Expecting 1 statistical columns
+            Assert.Equal(8, result.shape[0]); // Expecting 8 statistical rows
+
+            // Assert specific values for "count", "mean", "std", "min", "25%", "50%", "75%", "max"
+            Assert.Equal(5, result.data[0].GetValue<double>(0)); // count
+            Assert.Equal(3, result.data[0].GetValue<double>(1)); // mean
+            Assert.Equal(1.5811388300841898, result.data[0].GetValue<double>(2)); // std
+            Assert.Equal(1, result.data[0].GetValue<double>(3)); // min
+            Assert.Equal(2, result.data[0].GetValue<double>(4)); // 25%
+            Assert.Equal(3, result.data[0].GetValue<double>(5)); // 50%
+            Assert.Equal(4, result.data[0].GetValue<double>(6)); // 75%
+            Assert.Equal(5, result.data[0].GetValue<double>(7)); // max
         }
     }
 }
