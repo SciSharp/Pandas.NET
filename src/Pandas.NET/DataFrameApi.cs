@@ -39,6 +39,10 @@ namespace PandasNet
                 };
             }
             var df = new DataFrame(cols);
+            foreach (var s in df.data)
+            {
+                s.SetIndex(df.index);
+            }
             return df;
         }
 

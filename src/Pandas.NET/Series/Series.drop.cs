@@ -19,6 +19,18 @@ public partial class Series
             _ => throw new NotImplementedException("")
         };
 
+        if (_index == null)
+        {
+            throw new NotSupportedException("_index was null for this series.");
+        }
+        if (index == null)
+        {
+            throw new NotSupportedException("array of indexes to drop cannot be null");
+        }
+        if (_index.array<int>() == null)
+        {
+            throw new NotSupportedException("_index.array<int>() was null for this series.");
+        }
         var index2 = _index.array<int>().Where(x => !index.Contains(x)).ToArray();
         return new Series(data, column: _column, index: new Series(index2));
     }
@@ -26,7 +38,7 @@ public partial class Series
     private Array Copy<T>(T[] array, int[] excluded = null)
     {
         var data = new List<T>();
-        for(int i = 0; i < array.Length; i++)
+        for (int i = 0; i < array.Length; i++)
         {
             if (excluded != null && excluded.Contains(i))
                 continue;
