@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using Tensorflow;
@@ -18,11 +19,6 @@ namespace PandasNet
             get
             {
                 return _data.FirstOrDefault(x => x.name == columName);
-            }
-
-            set
-            {
-                throw new NotImplementedException("");
             }
         }
 
@@ -86,7 +82,7 @@ namespace PandasNet
                 index.SetValue(_index.GetValue(row), data1RowIndex);
                 data1RowIndex++;
             }
-            
+
             foreach (var d in data1)
                 d.SetIndex(index);
 
