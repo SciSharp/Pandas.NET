@@ -19,6 +19,9 @@ namespace PandasConsole
 
             [Option("describe", Required = false, HelpText = "Print the describe a DataFrame")]
             public bool DescribeSample { get; set; }
+
+            [Option("multi-column-indexer", Required = false, HelpText = "Print the describe a DataFrame")]
+            public bool MultiColumnIndexer { get; set; }
         }
 
 
@@ -34,6 +37,10 @@ namespace PandasConsole
                     if (o.DescribeSample)
                     {
                         CommandRunners.RunDescribeSample();
+                    }
+                    if (o.MultiColumnIndexer)
+                    {
+                        CommandRunners.RunMultiColumnIndexer();
                     }
                 })
                 .WithNotParsed(CommandRunners.HandleParseError);
@@ -58,6 +65,18 @@ namespace PandasConsole
                 var df = describe.DescribeDataFrame();
 
                 Console.Write(Utils.RenderDataTable(Utils.DataFrameToTable(df)));
+            }
+
+            internal static void RunMultiColumnIndexer()
+            {
+                var indexers = new PandasConsoleIndexers();
+                var dfTuple = indexers.MultiColumnIndexer();
+
+                Console.WriteLine("Original DataFrame");
+                Console.Write(Utils.RenderDataTable(Utils.DataFrameToTable(dfTuple.Item1)));
+                
+                Console.WriteLine("Indexed DataFrame");
+                Console.Write(Utils.RenderDataTable(Utils.DataFrameToTable(dfTuple.Item2)));
             }
         }
     }
