@@ -14,11 +14,11 @@ namespace PandasNet
             get => Slice(slice);
         }
 
-        public Series this[int row, string columName]
+        public object this[int row, string columName]
         {
             get
             {
-                return _data.FirstOrDefault(x => x.name == columName);
+                return _data.FirstOrDefault(x => x.name == columName).GetValue(row);
             }
         }
 
