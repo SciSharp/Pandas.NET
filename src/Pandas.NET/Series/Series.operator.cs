@@ -51,14 +51,14 @@ namespace PandasNet
             throw new NotImplementedException("");
         }
 
-        public static Series operator -(Series a, float b)
+        public static Series operator -(Series a, double b)
         {
             if (a.data is float[] float32)
-                return new Series(float32.Select(x => x - b).ToArray());
+                return new Series(float32.Select(x => x - Convert.ToSingle(b)).ToArray(), a.column);
             else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x - b).ToArray());
+                return new Series(float64.Select(x => x - b).ToArray(), a.column);
             else if (a.data is int[] int32)
-                return new Series(int32.Select(x => x - b).ToArray());
+                return new Series(int32.Select(x => x - Convert.ToInt32(b)).ToArray(), a.column);
             throw new NotImplementedException("");
         }
 

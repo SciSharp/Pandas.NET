@@ -16,7 +16,9 @@ namespace PandasNet
             {
                 data.Add(a.data[i] - b.data switch
                 {
+                    double[] double64 => double64[i],
                     float[] float32 => float32[i],
+                    int[] int32 => int32[i],
                     _ => throw new NotImplementedException("")
                 });
             }
