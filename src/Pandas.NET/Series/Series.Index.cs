@@ -5,6 +5,21 @@ namespace PandasNet
 {
     public partial class Series
     {
+        public object this[string index]
+        {
+            get
+            {
+                var idx = Array.IndexOf(_index.data, index);
+                return _data.GetValue(idx);
+            }
+
+            set
+            {
+                var idx = Array.IndexOf(_index.data, index);
+                _data.SetValue(value, idx);
+            }
+        }
+        
         public object this[Series mask]
         {
             get
