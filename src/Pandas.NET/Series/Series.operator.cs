@@ -5,21 +5,27 @@ namespace PandasNet
 {
     public partial class Series
     {
-        public static Series operator !=(Series a, float b)
+        public static Series operator !=(Series a, double b)
         {
-            if (a.data is float[] float32)
-                return new Series(float32.Select(x => x != b).ToArray());
-            else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x != b).ToArray());
+            if (a.data is int[] || a.data is float[] || a.data is double[])
+            {
+                return new Series(a.data.Cast<double>().Select(x => x != b).ToArray()
+                    , column: a._column
+                    , index: a._index?.copy());
+            }
+
             throw new NotImplementedException("");
         }
 
-        public static Series operator ==(Series a, float b)
+        public static Series operator ==(Series a, double b)
         {
-            if (a.data is float[] float32)
-                return new Series(float32.Select(x => x == b).ToArray());
-            else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x == b).ToArray());
+            if (a.data is int[] || a.data is float[] || a.data is double[])
+            {
+                return new Series(a.data.Cast<double>().Select(x => x == b).ToArray()
+                    , column: a._column
+                    , index: a._index?.copy());
+            }
+
             throw new NotImplementedException("");
         }
 
@@ -42,41 +48,51 @@ namespace PandasNet
             throw new NotImplementedException("");
         }
 
-        public static Series operator +(Series a, float b)
+        public static Series operator +(Series a, double b)
         {
-            if (a.data is float[] float32)
-                return new Series(float32.Select(x => x + b).ToArray());
-            else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x + b).ToArray());
+            if (a.data is int[] || a.data is float[] || a.data is double[])
+            {
+                return new Series(a.data.Cast<double>().Select(x => x + b).ToArray()
+                    , column: a._column
+                    , index: a._index?.copy());
+            }
+
             throw new NotImplementedException("");
         }
 
         public static Series operator -(Series a, double b)
         {
-            if (a.data is float[] float32)
-                return new Series(float32.Select(x => x - Convert.ToSingle(b)).ToArray(), a.column);
-            else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x - b).ToArray(), a.column);
-            else if (a.data is int[] int32)
-                return new Series(int32.Select(x => x - Convert.ToInt32(b)).ToArray(), a.column);
+            if (a.data is int[] || a.data is float[] || a.data is double[])
+            {
+                return new Series(a.data.Cast<double>().Select(x => x - b).ToArray()
+                    , column: a._column
+                    , index: a._index?.copy());
+            }
+
             throw new NotImplementedException("");
         }
 
-        public static Series operator *(Series a, float b)
+        public static Series operator *(Series a, double b)
         {
-            if (a.data is float[] float32)
-                return new Series(float32.Select(x => x * b).ToArray());
-            else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x * b).ToArray());
+            if (a.data is int[] || a.data is float[] || a.data is double[])
+            {
+                return new Series(a.data.Cast<double>().Select(x => x * b).ToArray()
+                    , column: a._column
+                    , index: a._index?.copy());
+            }
+
             throw new NotImplementedException("");
         }
 
-        public static Series operator /(Series a, float b)
+        public static Series operator /(Series a, double b)
         {
-            if (a.data is float[] float32)
-                return new Series(float32.Select(x => x / b).ToArray());
-            else if (a.data is double[] float64)
-                return new Series(float64.Select(x => x / b).ToArray());
+            if (a.data is int[] || a.data is float[] || a.data is double[])
+            {
+                return new Series(a.data.Cast<double>().Select(x => x / b).ToArray()
+                    , column: a._column
+                    , index: a._index?.copy());
+            }
+
             throw new NotImplementedException("");
         }
     }
