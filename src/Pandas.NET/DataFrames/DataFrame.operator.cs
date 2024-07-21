@@ -16,7 +16,9 @@ namespace PandasNet
             {
                 data.Add(a.data[i] - b.data switch
                 {
+                    double[] double64 => double64[i],
                     float[] float32 => float32[i],
+                    int[] int32 => int32[i],
                     _ => throw new NotImplementedException("")
                 });
             }
@@ -32,11 +34,23 @@ namespace PandasNet
             {
                 data.Add(a.data[i] / b.data switch
                 {
+                    double[] double64 => double64[i],
                     float[] float32 => float32[i],
+                    int[] int32 => int32[i],
                     _ => throw new NotImplementedException("")
                 });
             }
 
+            return new DataFrame(data, index: a.index, columns: a.columns);
+        }
+
+        public static DataFrame operator *(DataFrame a, Series b)
+        {
+            var data = new List<Series>();
+            for(int i=0;i<a.data.Count; i++)
+            {
+                data.Add(a.data[i] * Convert.ToDouble(b.data.GetValue(i)));
+            }
             return new DataFrame(data, index: a.index, columns: a.columns);
         }
 
@@ -75,6 +89,19 @@ namespace PandasNet
         public static bool operator !=(DataFrame a, DataFrame b)
         {
             return !(a == b);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DataFrame frame &&
+                   data == frame.data &&
+                   columns == frame.columns &&
+                   index == frame.index;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(data, columns, index);
         }
     }
 }
