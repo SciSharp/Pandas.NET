@@ -90,5 +90,18 @@ namespace PandasNet
         {
             return !(a == b);
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DataFrame frame &&
+                   data == frame.data &&
+                   columns == frame.columns &&
+                   index == frame.index;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(data, columns, index);
+        }
     }
 }

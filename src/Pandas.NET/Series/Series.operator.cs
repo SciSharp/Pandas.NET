@@ -95,5 +95,31 @@ namespace PandasNet
 
             throw new NotImplementedException("");
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Series series)
+            {
+                if (series.data is double[] double64)
+                {
+                    return data.Cast<double>().SequenceEqual(double64);
+                }
+                else if (series.data is float[] float32)
+                {
+                    return data.Cast<float>().SequenceEqual(float32);
+                }
+                else if (series.data is int[] int32)
+                {
+                    return data.Cast<int>().SequenceEqual(int32);
+                }
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

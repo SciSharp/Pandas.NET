@@ -105,4 +105,41 @@ public class DataFrameOperatorTests
         Assert.False(badColumnInequal);
         Assert.False(badDataInequal);
     }
+
+    [Fact]
+    public void TestInEqualityOperator()
+    {
+        // Arrange
+        List<Series> data = new List<Series>
+        {
+            new Series(new float[] { 1, 2, 3, 4, 5 }, new Column { Name = "column1", DType = typeof(float) }),
+            new Series(new float[] { 6, 7, 8, 9, 10 }, new Column { Name = "column2", DType = typeof(float) })
+        };
+        var df = new DataFrame(data);
+        var df2 = new DataFrame(data);
+
+        // Arrange: DataFrame with different column name
+        List<Series> badColumnData = new List<Series>
+        {
+            new Series(new float[] { 1, 2, 3, 4, 5 }, new Column { Name = "Column1", DType = typeof(float) }),
+            new Series(new float[] { 6, 7, 8, 9, 10 }, new Column { Name = "column2", DType = typeof(float) })
+        };
+        var badColumnDf = new DataFrame(badColumnData);
+        // Arrange: DataFrame with different data
+        List<Series> badData = new List<Series>
+        {
+            new Series(new float[] { 1, 2, 3, 4, 5 }, new Column { Name = "column1", DType = typeof(float) }),
+            new Series(new float[] { 6, 7, 8, 9, 11 }, new Column { Name = "column2", DType = typeof(float) })
+        };
+
+        // Act
+        bool areEqual = df != df2;
+        bool badColumnInequal = df != badColumnDf;
+        bool badDataInequal = df != new DataFrame(badData);
+
+        // Assert
+        Assert.False(areEqual);
+        Assert.True(badColumnInequal);
+        Assert.True(badDataInequal);
+    }
 }
