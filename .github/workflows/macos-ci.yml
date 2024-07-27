@@ -9,13 +9,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build_matrix:
-    strategy:
-      matrix:
-        os:
-          - macos-latest
-
-    runs-on: ${{matrix.os}}
+  build:
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -25,10 +20,6 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: SciSharp Mac OS Dependencies
-      run: dotnet add src/Pandas.NET/Pandas.NET.csproj package SciSharp.TensorFlow.Redist-OSX
-    - name: SciSharp Mac OS Dependencies Test
-      run: dotnet add test/Pandas.NET.Test/Pandas.NET.Test.csproj package SciSharp.TensorFlow.Redist-OSX
     - name: Build
       run: dotnet build --no-restore
     - name: Test
