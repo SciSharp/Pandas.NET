@@ -4,7 +4,9 @@ using System.Linq;
 using PandasNet;
 using Tensorflow;
 
-public class DataFrameTests
+namespace Pandas.Test;
+
+public class DataFramePopTest
 {
     [Fact]
     public void TestPopMethod()
