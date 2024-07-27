@@ -27,6 +27,8 @@ jobs:
       run: dotnet restore
     - name: SciSharp Mac OS Dependencies
       run: dotnet add src/Pandas.NET/Pandas.NET.csproj package SciSharp.TensorFlow.Redist-OSX
+    - name: SciSharp Mac OS Dependencies Test
+      run: dotnet add test/Pandas.NET.Test/Pandas.NET.Test.csproj package SciSharp.TensorFlow.Redist-OSX
     - name: Build
       run: dotnet build --no-restore
     - name: Test
