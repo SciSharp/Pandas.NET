@@ -18,7 +18,7 @@ namespace PandasConsole.Methods
             return df;
         }
         
-
+        // index on multiple columns
         public (DataFrame, DataFrame) MultiColumnIndexer()
         {
             var df = GetSampleDataFrame();
