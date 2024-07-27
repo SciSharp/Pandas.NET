@@ -45,6 +45,12 @@ namespace PandasNet
                 index.size,
                 columns.Count
             };
+
+            foreach (var s in _data)
+            {
+                s.SetIndex(_index);
+            }
+
         }
     }
 }
