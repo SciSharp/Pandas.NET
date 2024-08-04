@@ -21,7 +21,7 @@
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
     <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.16.0" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist-OSX" Version="2.15.0" />
     <PackageReference Include="TensorFlow.Keras" Version="0.15.0" />
-    <PackageReference Include="TensorFlow.NET" Version="0.150.0" />
   </ItemGroup>
 </Project>
